@@ -82,14 +82,16 @@
   letter-spacing: -0.025em;
 }
 
-/* Stroke subtitle */
+/* Italic subtitle */
 #HomeHeroContainer .HomeHeroMainContainer h2 {
-  font-size: clamp(32px, 4vw, 56px);
+  font-size: clamp(26px, 3.2vw, 46px);
   font-weight: 400;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(255,255,255,0.38);
+  font-style: italic;
+  color: rgba(255,255,255,0.58);
+  -webkit-text-stroke: 0;
   margin: 0 0 36px;
   line-height: 1.1;
+  letter-spacing: -0.01em;
 }
 
 /* Tagline */
@@ -234,21 +236,43 @@
 
   .HomeHeroMainContainer {
     padding-top: calc(var(--navHeight) + 60px);
-    padding-bottom: 120px;
+    padding-bottom: 100px;
     max-width: none;
   }
 
-  #HomeHeroContainer .HomeHeroMainContainer h1 { font-size: 38px; }
-  #HomeHeroContainer .HomeHeroMainContainer h2 { font-size: 30px; }
+  #HomeHeroContainer .HomeHeroMainContainer h1 { font-size: 36px; }
+  #HomeHeroContainer .HomeHeroMainContainer h2 { font-size: 22px; }
 
-  .HeroTagline p { font-size: 16px; }
+  .HeroTagline p { font-size: 15px; }
+
+  .HeroCtaRow { flex-wrap: wrap; gap: 12px; }
 
   .HeroStatsRow {
     margin-top: 36px;
     padding-top: 28px;
   }
 
-  .HeroStatItem h2  { font-size: 38px !important; }
-  .HeroStatItem     { padding-right: 28px; }
-  .HeroStatItem:not(:last-child) { margin-right: 28px; }
+  .HeroStatItem h2  { font-size: 36px !important; }
+  .HeroStatItem     { padding-right: 24px; }
+  .HeroStatItem:not(:last-child) { margin-right: 24px; }
+}
+
+@media (max-width: 480px) {
+  .HomeHeroMainContainer {
+    padding-top: calc(var(--navHeight) + 40px);
+    padding-bottom: 80px;
+  }
+
+  #HomeHeroContainer .HomeHeroMainContainer h1 { font-size: 30px; }
+  #HomeHeroContainer .HomeHeroMainContainer h2 { font-size: 19px; margin-bottom: 24px; }
+
+  .HeroTagline p { font-size: 14px; }
+
+  .HeroCtaPrimary, .HeroCtaSecondary { width: 100%; justify-content: center; }
+
+  .HeroStatItem h2  { font-size: 30px !important; }
+  .HeroStatItem     { padding-right: 18px; }
+  .HeroStatItem:not(:last-child) { margin-right: 18px; }
+
+  .HeroScrollIndicator { display: none; }
 }

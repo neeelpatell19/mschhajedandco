@@ -97,6 +97,14 @@ li {
   max-width: 100%;
 }
 
+@media (max-width: 900px) {
+  .ContainerDefault { margin: 0 24px; }
+}
+
+@media (max-width: 480px) {
+  .ContainerDefault { margin: 0 16px; }
+}
+
 .SectionPadding { padding: 2.5rem 0; }
 
 /* ─── Global Keyframes ───────────────────────────────────────────── */

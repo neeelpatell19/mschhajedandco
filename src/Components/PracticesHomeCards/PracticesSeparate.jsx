@@ -2,7 +2,11 @@ import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import "./PracticeSeparate.css";
 import { motion } from "framer-motion";
+import { HiArrowRight } from "react-icons/hi";
 import TRANSACTIONADVISORY from "./TRANSACTION-ADVISORY.jpeg";
+
+const ease = [0.22, 1, 0.36, 1];
+
 const allPractices = [
     { label: "India Strategy — Doing Business in India", path: "india-strategy-doing-business-india" },
     { label: "Start-Up Services",                        path: "start-up-services"                   },
@@ -15,9 +19,22 @@ const allPractices = [
     { label: "Commercial and Legal Assistance",         path: "commercial-and-legal-assistance"      },
 ];
 
+const practicesMeta = {
+    "india-strategy-doing-business-india": "Expert advisory for companies entering and expanding in Indian markets.",
+    "start-up-services":                   "End-to-end compliance and growth advisory for new ventures at every stage.",
+    "assurances":                          "Independent, high-quality audit and assurance services trusted across India.",
+    "transaction-advisory":                "Strategic M&A, due diligence and valuation across complex transactions.",
+    "direct-taxes":                        "Proactive tax planning, structuring and litigation support for corporates.",
+    "goods-and-services-tax":             "GST registration, compliance advisory and representation before authorities.",
+    "transfer-pricing":                    "APA advisory, documentation and dispute resolution for cross-border pricing.",
+    "knowledge-process-outsourcing":       "Scalable outsourcing of bookkeeping, payroll and compliance functions.",
+    "commercial-and-legal-assistance":     "Legal drafting, corporate governance and business structuring support.",
+};
+
 const PracticesSeparate = () => {
     const { practiceName } = useParams();
     const activeLabel = allPractices.find(p => p.path === practiceName)?.label || "Practice";
+    const tagline     = practicesMeta[practiceName] || "";
 
     // Define the dynamic content for each practice
     const practiceContent = {
@@ -542,23 +559,40 @@ const PracticesSeparate = () => {
     return (
         <div id="separatePracticeContainer">
 
-            {/* Breadcrumb */}
+            {/* ── Dark page header ── */}
+            <div className="PracticePageHeader">
+                <div className="ContainerDefault">
+                    <motion.div
+                        initial={{ opacity: 0, y: 24 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.75, ease, delay: 0.1 }}
+                    >
+                        <div className="section-label"><span>Practice Areas</span></div>
+                        <h1>{activeLabel}</h1>
+                        {tagline && <p>{tagline}</p>}
+                    </motion.div>
+                </div>
+            </div>
+
+            {/* ── Breadcrumb ── */}
             <div className="PracticeBreadcrumb">
                 <nav>
                     <Link to="/">Home</Link>
                     <span>/</span>
-                    <Link to="/">Practices</Link>
+                    <Link to="/practices/assurances">Practices</Link>
                     <span>/</span>
                     <strong>{activeLabel}</strong>
                 </nav>
             </div>
 
-            {/* Sidebar + Content */}
+            {/* ── Sidebar + Content ── */}
             <div className="PracticePageLayout">
 
                 {/* Sidebar */}
                 <aside className="PracticeSidebar">
-                    <h4>Practices</h4>
+                    <div className="PracticeSidebarHeader">
+                        <h4>All Practices</h4>
+                    </div>
                     <ul>
                         {allPractices.map((p, i) => (
                             <li key={i}>
@@ -566,11 +600,24 @@ const PracticesSeparate = () => {
                                     to={`/practices/${p.path}`}
                                     className={practiceName === p.path ? "active" : ""}
                                 >
+                                    <span className="sidebar-num">
+                                        {String(i + 1).padStart(2, "0")}
+                                    </span>
                                     {p.label}
                                 </Link>
                             </li>
                         ))}
                     </ul>
+
+                    <div className="PracticeSidebarCTA">
+                        <p>Need specialist advice?</p>
+                        <a
+                            href="mailto:info@mschhajedandco.com"
+                            className="PracticeSidebarCTABtn"
+                        >
+                            Talk to an Expert <HiArrowRight />
+                        </a>
+                    </div>
                 </aside>
 
                 {/* Main content */}
@@ -578,7 +625,7 @@ const PracticesSeparate = () => {
                     className="PracticeContent"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.75, ease: [0.22,1,0.36,1], delay: 0.15 }}
+                    transition={{ duration: 0.75, ease, delay: 0.2 }}
                 >
                     {practiceContent[practiceName] || (
                         <p>Content for this practice is coming soon.</p>

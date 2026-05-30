@@ -189,14 +189,16 @@ const AboutUs = () => {
                 {/* ── Team members ── */}
                 <div className="TeamPeoplesContaner">
                     <div className="ContainerDefault">
-                        <motion.h2
+                        <motion.div
+                            className="TeamSectionHeader"
                             initial={{ opacity: 0, y: 24 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, amount: 0.3 }}
                             transition={{ duration: 0.75, ease: [0.22,1,0.36,1] }}
                         >
-                            Our Team
-                        </motion.h2>
+                            <div className="section-label"><span>People</span></div>
+                            <h2>Our Team</h2>
+                        </motion.div>
                         <div className="TeamMembersDataContainer">
                             <Row>
                                 {teamData.map((item, index) => (

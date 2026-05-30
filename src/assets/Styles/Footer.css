@@ -295,24 +295,40 @@
   }
 
   .FooterCtaStrip { padding: 48px 0; }
+  .FooterCtaText h2 { font-size: 22px; }
 
-  #FooterContainer {
-    padding: 60px 0 0;
-  }
+  #FooterContainer { padding: 56px 0 0; }
 
   .FooterBrandCol {
     padding-right: 0;
-    margin-bottom: 40px;
+    margin-bottom: 36px;
   }
 
-  .FooterColHeading { margin-bottom: 16px; }
+  .FooterColHeading { margin-bottom: 14px; }
 
   .LegalInfo { display: none; }
 
   .CopyWriteTextContainer {
-    padding: 18px 16px;
+    padding: 18px 24px;
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
+    gap: 6px;
   }
+}
+
+@media (max-width: 480px) {
+  .FooterCtaStrip { padding: 36px 0; }
+  .FooterCtaText h2 { font-size: 20px; }
+  .FooterCtaText p { font-size: 13px; }
+  .FooterCtaBtn { width: 100%; justify-content: center; }
+
+  #FooterContainer { padding: 44px 0 0; }
+
+  .FooterTagline { font-size: 13px; }
+
+  .FooterNewsletterForm { flex-direction: column; padding: 12px; }
+  .FooterNewsletterSubmit { width: 100%; text-align: center; }
+
+  .CopyWriteTextContainer { padding: 16px; }
+  .CopyWriteTextContainer p { font-size: 11px; }
 }

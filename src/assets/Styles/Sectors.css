@@ -117,12 +117,27 @@
 }
 
 @media (max-width: 900px) {
-  .SectorsSectionLabel {
-    margin: 0 16px 32px;
-  }
+  #AnimatedSectorsContainer { padding: 56px 0; }
+
+  .SectorsSectionLabel { margin: 0 24px 28px; }
 
   .sectors-track-wrapper::before,
-  .sectors-track-wrapper::after {
-    width: 60px;
-  }
+  .sectors-track-wrapper::after { width: 60px; }
+
+  .sector-item { padding: 10px 22px; }
+  .sector-item img { width: 26px; height: 26px; }
+  .sector-item p { font-size: 13px; }
+}
+
+@media (max-width: 480px) {
+  #AnimatedSectorsContainer { padding: 40px 0; }
+
+  .SectorsSectionLabel { margin: 0 16px 20px; }
+
+  .sectors-track-wrapper::before,
+  .sectors-track-wrapper::after { width: 32px; }
+
+  .sector-item { padding: 8px 16px; gap: 8px; }
+  .sector-item img { width: 22px; height: 22px; }
+  .sector-item p { font-size: 12px; }
 }

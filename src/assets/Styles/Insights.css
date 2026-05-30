@@ -141,19 +141,27 @@
 
 /* ─── Responsive ─────────────────────────────────────────────────── */
 @media (max-width: 900px) {
-  #InSightsContainer {
-    padding: 80px 0 90px;
-  }
+  #InSightsContainer { padding: 72px 0 80px; }
 
   .InsightsHeaderRow {
     flex-direction: column;
     align-items: flex-start;
-    margin-bottom: 36px;
+    margin-bottom: 32px;
+    gap: 16px;
   }
 
-  #InSightsContainer .ant-row .ant-col {
-    padding: 8px 0;
-  }
+  .InsightsHeaderRow h1 { font-size: clamp(24px, 5vw, 36px); }
 
-  .BlogPostImageContainer { height: 220px; }
+  #InSightsContainer .ant-row .ant-col { padding: 8px 0; }
+
+  .BlogPostImageContainer { height: 200px; }
+  .BlogPostContentContainer h2 { font-size: 17px; }
+}
+
+@media (max-width: 480px) {
+  #InSightsContainer { padding: 52px 0 60px; }
+
+  .BlogPostImageContainer { height: 180px; }
+  .BlogPostContentContainer { padding: 18px 18px 16px; }
+  .BlogPostContentContainer h2 { font-size: 15px; }
 }

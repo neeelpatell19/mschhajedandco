@@ -19,11 +19,13 @@ const NavigationBar = () => {
 
     // Sync nav state on every route change
     useEffect(() => {
-        const isDarkHeroPage = DARK_HERO_PATHS.includes(location.pathname);
+        const isDarkHeroPage =
+            DARK_HERO_PATHS.includes(location.pathname) ||
+            location.pathname.startsWith("/practices/");
         const currentY = window.scrollY;
 
         if (!isDarkHeroPage) {
-            // Detail pages (practices, blog article) — start white immediately
+            // Detail pages (blog article, etc.) — start white immediately
             setScrolled(true);
         } else {
             setScrolled(currentY > 60);

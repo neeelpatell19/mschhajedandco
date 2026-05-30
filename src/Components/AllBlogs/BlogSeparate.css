@@ -131,9 +131,28 @@
 
 /* ─── Responsive ─────────────────────────────────────────────────── */
 @media (max-width: 900px) {
-  .BlogBreadcrumb { padding: 12px 16px; }
+  .BlogBreadcrumb { padding: 12px 24px; }
 
-  .BlogArticleWrapper { padding: 36px 0 70px; }
+  .BlogArticleWrapper { padding: 32px 0 60px; }
 
-  .BlogArticleImage img { height: 220px; }
+  .BlogArticleHeader h1 { font-size: 26px; }
+  .BlogArticleBody p { font-size: 15px; }
+  .BlogArticleBody h2 { font-size: 20px; }
+  .BlogArticleImage img { height: 240px; }
+}
+
+@media (max-width: 480px) {
+  .BlogBreadcrumb { padding: 10px 16px; }
+  .BlogBreadcrumb nav { font-size: 11px; }
+
+  .BlogArticleWrapper { padding: 24px 0 48px; }
+
+  .BlogArticleHeader h1 { font-size: 22px; }
+  .BlogArticleHeader { margin-bottom: 28px; }
+  .BlogArticleBody p { font-size: 14px; line-height: 1.72; }
+  .BlogArticleBody h2 { font-size: 18px; }
+  .BlogArticleBody h3 { font-size: 16px; }
+  .BlogArticleBody ul li { font-size: 14px; }
+  .BlogArticleImage img { height: 190px; border-radius: 8px; }
+  .BlogArticleMeta { flex-direction: column; gap: 4px; }
 }

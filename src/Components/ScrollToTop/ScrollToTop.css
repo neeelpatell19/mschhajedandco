@@ -1,18 +1,23 @@
-/* ScrollToTopButton.css */
 .scroll-to-top-btn {
     position: fixed;
-    bottom: 10px;
-    right: 10px;
+    bottom: 24px;
+    right: 24px;
     z-index: 1000;
-    background-color: #071D96; /* Button background color */
+    background-color: var(--navy);
     border: none;
-    transition:0.5s;
-
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 16px rgba(27,45,126,0.35);
 }
 
-/* Optional: Hover effect */
 .scroll-to-top-btn:hover {
-    background-color: #071D96 !important; /* Lighter background on hover */
-    transform: translatey(-5px);
-    transition:0.5s;
+    background-color: var(--navyDark) !important;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(27,45,126,0.45);
+}
+
+@media (max-width: 768px) {
+    .scroll-to-top-btn {
+        bottom: 16px;
+        right: 16px;
+    }
 }

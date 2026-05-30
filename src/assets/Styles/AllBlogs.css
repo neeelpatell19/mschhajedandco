@@ -29,9 +29,9 @@
 }
 
 .AllBlogsHeader .section-label { margin-bottom: 20px; }
-.AllBlogsHeader .section-label::before { background: rgba(255,255,255,0.50); }
-.AllBlogsHeader .section-label span { color: rgba(255,255,255,0.50); }
-.AllBlogsHeader .section-label span::before { background: rgba(255,255,255,0.30); opacity: 1; }
+.AllBlogsHeader .section-label::before { background: rgba(255,255,255,0.70); }
+.AllBlogsHeader .section-label span { color: rgba(255,255,255,0.65); }
+.AllBlogsHeader .section-label span::before { background: rgba(255,255,255,0.40); opacity: 1; }
 
 .AllBlogsHeader h1 {
   font-size: clamp(28px, 4vw, 52px);
@@ -160,17 +160,24 @@
 
 /* ─── Responsive ─────────────────────────────────────────────────── */
 @media (max-width: 900px) {
-  .AllBlogsHeader {
-    padding: calc(var(--navHeight) + 24px) 16px 60px;
-  }
+  .AllBlogsHeader { padding: calc(var(--navHeight) + 24px) 24px 56px; }
+  .AllBlogsHeader h1 { font-size: 30px; }
+  .AllBlogsHeader p { font-size: 15px; }
 
-  .AllBlogsBody {
-    padding: 48px 0 70px;
-  }
+  .AllBlogsBody { padding: 44px 0 64px; }
+  .BlogPostCardContainer { margin: 8px 0; }
+  .BlogPostImageContainer { height: 200px; }
+  .BlogPostContentContainer h2 { font-size: 16px; }
+}
 
-  .BlogPostCardContainer {
-    margin: 8px 0;
-  }
+@media (max-width: 480px) {
+  .AllBlogsHeader { padding: calc(var(--navHeight) + 16px) 16px 40px; }
+  .AllBlogsHeader h1 { font-size: 24px; }
+  .AllBlogsHeader p { font-size: 14px; max-width: none; }
 
-  .BlogPostImageContainer { height: 180px; }
+  .AllBlogsBody { padding: 32px 0 48px; }
+  .BlogPostImageContainer { height: 170px; }
+  .BlogPostContentContainer { padding: 18px 18px 14px; }
+  .BlogPostContentContainer h2 { font-size: 15px; }
+  .BlogPostMeta { font-size: 11px; }
 }

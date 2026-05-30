@@ -38,15 +38,15 @@
 }
 
 .AboutUsMainHeaderContainer .section-label::before {
-  background: rgba(255,255,255,0.50);
+  background: rgba(255,255,255,0.70);
 }
 
 .AboutUsMainHeaderContainer .section-label span {
-  color: rgba(255,255,255,0.55);
+  color: rgba(255,255,255,0.65);
 }
 
 .AboutUsMainHeaderContainer .section-label span::before {
-  background: rgba(255,255,255,0.30);
+  background: rgba(255,255,255,0.40);
   opacity: 1;
 }
 
@@ -193,11 +193,15 @@
   padding: 100px 0;
 }
 
-.TeamPeoplesContaner h2 {
+.TeamSectionHeader {
+  margin-bottom: 52px;
+}
+
+.TeamSectionHeader h2 {
   font-size: clamp(28px, 3vw, 44px);
   font-weight: 400;
   color: var(--text);
-  margin: 0 0 52px;
+  margin: 12px 0 0;
   letter-spacing: -0.02em;
 }
 
@@ -222,19 +226,20 @@
 .TeamMemberCardContainer > div:first-child {
   position: relative;
   overflow: hidden;
-  height: 320px;
+  height: 380px;
 }
 
 .TeamMemberCardContainer > div:first-child img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 10%;
   display: block;
   transition: transform 0.60s cubic-bezier(0.22,1,0.36,1);
 }
 
 .TeamMemberCardContainer:hover > div:first-child img {
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
 
 /* Hover overlay */
@@ -341,37 +346,57 @@
 /* ─── Responsive ─────────────────────────────────────────────────── */
 @media (max-width: 900px) {
   .AboutUsMainHeaderContainer {
-    padding: calc(var(--navHeight) + 32px) 16px 60px;
+    padding: calc(var(--navHeight) + 32px) 24px 56px;
   }
 
-  .AboutUsMainHeaderContainer h1 {
-    font-size: 36px;
-  }
+  .AboutUsMainHeaderContainer h1 { font-size: 34px; }
+  .AboutUsMainHeaderContainer > div p { font-size: 15px; }
 
-  .TopAnimatedCommonBannerAllPages {
-    height: 280px;
-  }
+  .TopAnimatedCommonBannerAllPages { height: 280px; }
 
-  .CompanyAnimatedNumbersContainer .ant-row {
-    flex-direction: column;
-  }
+  .CompanyAnimatedNumbersContainer .ant-row { flex-direction: column; }
 
   .CounterCardContainer {
     border-right: none;
     border-bottom: 1px solid rgba(255,255,255,0.10);
-    padding: 36px 24px;
+    padding: 32px 24px;
   }
 
-  .TeamPeoplesContaner h2 {
-    font-size: 32px;
-    margin-bottom: 32px;
-  }
+  .CounterCard h2 { font-size: 44px; }
 
-  .TeamMemberCardContainer {
-    margin: 6px 0;
-  }
+  .TeamSectionHeader { margin-bottom: 36px; }
+  .TeamSectionHeader h2 { font-size: 30px; }
 
-  /* On mobile show the slide info always */
+  .TeamMemberCardContainer { margin: 6px 0; }
+  .TeamMemberCardContainer > div:first-child { height: 300px; }
+
+  .AboutUsInfoContainer { padding: 72px 0; }
+  .AboutContentContainerText h2 { font-size: 24px; }
+
+  /* Always show slide info on touch */
   .TeamMemberCardSlideInfo { transform: translateY(0); }
   .hoverOverlayBlackContainer { opacity: 1; }
+}
+
+@media (max-width: 480px) {
+  .AboutUsMainHeaderContainer {
+    padding: calc(var(--navHeight) + 20px) 16px 44px;
+  }
+
+  .AboutUsMainHeaderContainer h1 { font-size: 26px; }
+  .AboutUsMainHeaderContainer > div p { font-size: 14px; }
+
+  .TopAnimatedCommonBannerAllPages { height: 200px; }
+
+  .CompanyAnimatedNumbersContainer { padding: 0; }
+  .CounterCardContainer { padding: 28px 16px; }
+  .CounterCard h2 { font-size: 38px; }
+  .CounterCard p { font-size: 10px; }
+
+  .TeamPeoplesContaner { padding: 64px 0; }
+  .TeamSectionHeader h2 { font-size: 26px; }
+  .TeamMemberCardContainer > div:first-child { height: 260px; }
+
+  .ModalInsideInfo h1 { font-size: 20px; }
+  .ModalInsideInfo p { font-size: 13px; }
 }

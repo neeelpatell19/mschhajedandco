@@ -112,10 +112,15 @@
   left: 14px;
   right: 14px;
   height: 1.5px;
-  background: var(--navy);
+  background: rgba(255,255,255,0.70);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Switch underline to navy once nav turns white */
+#NavigationBarContainer.scrolled .navButton::after {
+  background: var(--navy);
 }
 
 .navButton:hover {

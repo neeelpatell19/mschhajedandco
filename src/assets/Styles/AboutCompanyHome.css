@@ -194,37 +194,23 @@
 
 /* ─── Responsive ─────────────────────────────────────────────────── */
 @media (max-width: 900px) {
-  #AboutCompanyHomeContainer {
-    padding: 80px 0;
-  }
+  #AboutCompanyHomeContainer { padding: 72px 0; }
 
-  .AboutCompanyHomeMainContainer {
-    margin-bottom: 40px;
-  }
-
-  .AboutCompanyHomeMainContainer h4 {
-    flex-direction: row;
-  }
-
-  .AboutCompanyHomeMainContainer h4::after {
-    display: none;
-  }
+  .AboutCompanyHomeMainContainer { margin-bottom: 40px; }
 
   .AboutCompanyImageHomeContainer {
     padding-right: 0;
-    margin-bottom: 80px;
+    margin-bottom: 64px;
   }
 
   .AboutCompanyImageHomeContainer::before {
-    top: 16px;
+    top: 12px;
     left: -8px;
     right: 8px;
-    bottom: -16px;
+    bottom: -12px;
   }
 
-  .AboutCompanyImageHomeContainer img {
-    height: 320px;
-  }
+  .AboutCompanyImageHomeContainer img { height: 320px; }
 
   .AboutCompanyContentHomeContainer {
     padding-left: 0;
@@ -238,7 +224,7 @@
 
   .AboutStatStrip {
     flex-wrap: wrap;
-    gap: 24px;
+    gap: 20px;
   }
 
   .AboutStatItem:not(:last-child) {
@@ -246,4 +232,20 @@
     padding-right: 0;
     margin-right: 0;
   }
+}
+
+@media (max-width: 600px) {
+  #AboutCompanyHomeContainer { padding: 56px 0; }
+
+  .AboutCompanyImageHomeContainer { margin-bottom: 48px; }
+  .AboutCompanyImageHomeContainer img { height: 260px; }
+  .AboutCompanyImageHomeContainer::before { display: none; }
+
+  .AboutCompanyContentHomeContainer::before { display: none; }
+
+  .AboutCompanyContentHomeContainer h2 { font-size: 26px; }
+  .AboutCompanyContentHomeContainer p { font-size: 14px; }
+
+  .AboutStatStrip { padding-top: 20px; margin-top: 24px; }
+  .AboutStatItem .stat-number { font-size: 28px; }
 }

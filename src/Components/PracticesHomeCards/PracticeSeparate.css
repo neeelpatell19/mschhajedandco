@@ -1,14 +1,61 @@
-/* ─── Individual Practice Page ───────────────────────────────────── */
+/* ─── Practice Detail Page ───────────────────────────────────────── */
 #separatePracticeContainer {
-  margin-top: var(--navHeight);
+  margin-top: 0;
   min-height: 100vh;
   background: var(--white);
+}
+
+/* ─── Dark Page Header ───────────────────────────────────────────── */
+.PracticePageHeader {
+  background: var(--navy);
+  padding: calc(var(--navHeight) + 52px) 0 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Dot-grid texture */
+.PracticePageHeader::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+}
+
+.PracticePageHeader .ContainerDefault {
+  position: relative;
+  z-index: 1;
+}
+
+/* Section label overrides for dark bg */
+.PracticePageHeader .section-label { margin-bottom: 18px; }
+.PracticePageHeader .section-label::before { background: rgba(255,255,255,0.60); }
+.PracticePageHeader .section-label span { color: rgba(255,255,255,0.60); }
+.PracticePageHeader .section-label span::before { background: rgba(255,255,255,0.35); opacity: 1; }
+
+.PracticePageHeader h1 {
+  font-size: clamp(26px, 3.5vw, 48px);
+  font-weight: 400;
+  color: white;
+  margin: 0 0 16px;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  max-width: 720px;
+}
+
+.PracticePageHeader p {
+  font-size: 16px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.68;
+  margin: 0;
+  max-width: 560px;
 }
 
 /* ─── Breadcrumb Bar ─────────────────────────────────────────────── */
 .PracticeBreadcrumb {
   background: var(--surface);
-  padding: 14px 70px;
+  padding: 12px 70px;
   border-bottom: 1px solid var(--border);
 }
 
@@ -28,72 +75,89 @@
 }
 
 .PracticeBreadcrumb nav a:hover { color: var(--navy); }
-
-.PracticeBreadcrumb nav span { opacity: 0.40; }
-
+.PracticeBreadcrumb nav span { opacity: 0.35; }
 .PracticeBreadcrumb nav strong {
   color: var(--navy);
   font-weight: 600;
 }
 
-/* ─── Two-column Layout: Sidebar + Content ───────────────────────── */
+/* ─── Two-column Layout ──────────────────────────────────────────── */
 .PracticePageLayout {
   display: flex;
   align-items: flex-start;
-  gap: 0;
 }
 
 /* ─── Sidebar ────────────────────────────────────────────────────── */
 .PracticeSidebar {
-  width: 280px;
+  width: 290px;
   flex-shrink: 0;
   background: var(--surface);
   border-right: 1px solid var(--border);
-  padding: 40px 0;
   position: sticky;
   top: var(--navHeight);
   max-height: calc(100vh - var(--navHeight));
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.PracticeSidebarHeader {
+  padding: 28px 28px 16px;
+  border-bottom: 1px solid var(--border);
 }
 
 .PracticeSidebar h4 {
   font-family: "Roboto", sans-serif;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--navy);
-  padding: 0 28px 16px;
   margin: 0;
-  border-bottom: 1px solid var(--border);
 }
 
 .PracticeSidebar ul {
   list-style: none;
-  padding: 12px 0;
+  padding: 10px 0;
   margin: 0;
+  flex: 1;
 }
 
 .PracticeSidebar ul li a {
-  display: block;
-  padding: 11px 28px;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 10px 28px;
   font-family: "Roboto", sans-serif;
   font-size: 13px;
   font-weight: 500;
   color: var(--textMuted);
   text-decoration: none;
   border-left: 3px solid transparent;
-  transition: color 0.25s ease, border-color 0.25s ease,
-              background 0.25s ease, padding-left 0.25s ease;
+  transition: color 0.22s ease, border-color 0.22s ease,
+              background 0.22s ease, padding-left 0.22s ease;
   line-height: 1.4;
+}
+
+/* Number before each link */
+.sidebar-num {
+  font-family: "Roboto", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  color: rgba(27,45,126,0.22);
+  flex-shrink: 0;
+  transition: color 0.22s ease;
 }
 
 .PracticeSidebar ul li a:hover {
   color: var(--navy);
-  border-left-color: rgba(27,45,126,0.25);
-  background: rgba(27, 45, 126, 0.04);
+  border-left-color: rgba(27,45,126,0.30);
+  background: rgba(27,45,126,0.04);
   padding-left: 34px;
 }
+
+.PracticeSidebar ul li a:hover .sidebar-num { color: var(--navy); }
 
 .PracticeSidebar ul li a.active {
   color: var(--navy);
@@ -103,27 +167,62 @@
   padding-left: 34px;
 }
 
+.PracticeSidebar ul li a.active .sidebar-num { color: var(--navy); }
+
+/* ─── Sidebar CTA ────────────────────────────────────────────────── */
+.PracticeSidebarCTA {
+  padding: 24px 28px;
+  border-top: 1px solid var(--border);
+  background: var(--white);
+}
+
+.PracticeSidebarCTA > p {
+  font-size: 12px;
+  color: var(--textMuted);
+  margin: 0 0 12px;
+  font-weight: 500;
+}
+
+.PracticeSidebarCTABtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: var(--navy);
+  color: white;
+  border-radius: 40px;
+  font-family: "Roboto", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.28s ease, transform 0.28s ease;
+  width: 100%;
+  justify-content: center;
+}
+
+.PracticeSidebarCTABtn:hover {
+  background: var(--navyDark);
+  transform: translateY(-1px);
+}
+
+.PracticeSidebarCTABtn svg { font-size: 13px; }
+
 /* ─── Main Content Area ──────────────────────────────────────────── */
 .PracticeContent {
   flex: 1;
-  padding: 56px 64px 80px 56px;
+  padding: 52px 64px 80px 56px;
   min-width: 0;
 }
 
-/* ─── Hero Image + Title Block ───────────────────────────────────── */
+/* ─── Hero Image (hide the old ALL-CAPS h2) ──────────────────────── */
 .PracticeImageContainer {
-  margin-bottom: 48px;
+  margin-bottom: 40px;
 }
 
 .PracticeImageContainer h2 {
-  font-size: clamp(22px, 2.2vw, 32px);
-  font-weight: 400;
-  color: var(--navy);
-  margin: 0 0 28px;
-  letter-spacing: -0.01em;
-  line-height: 1.18;
-  text-align: left;
-  text-transform: capitalize;
+  display: none;
 }
 
 .PracticeImageContainer img {
@@ -135,47 +234,57 @@
   box-shadow: var(--shadowMd);
 }
 
-/* ─── Content typography ─────────────────────────────────────────── */
+/* ─── Content Typography ─────────────────────────────────────────── */
 .PracticeContent > p,
 .PracticeContent p {
-  font-size: 16px;
-  line-height: 1.82;
+  font-size: 15px;
+  line-height: 1.85;
   color: var(--textMuted);
   margin-bottom: 16px;
 }
 
 .PracticeContent p b,
 .PracticeContent p strong {
-  color: var(--navy);
-  font-weight: 600;
+  display: block;
+  font-family: "Prata", serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--text);
+  margin: 32px 0 10px;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
 }
 
 .PracticeContent ul {
-  padding-left: 20px;
-  margin-bottom: 24px;
+  padding-left: 0;
+  margin-bottom: 28px;
+  list-style: none;
 }
 
 .PracticeContent ul li {
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.78;
   color: var(--textMuted);
-  margin-bottom: 6px;
-  padding-left: 4px;
-  font-style: normal;
+  margin-bottom: 8px;
+  padding-left: 20px;
+  position: relative;
 }
 
-.PracticeContent ul li::marker { color: var(--navy); }
+.PracticeContent ul li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--navy);
+  font-weight: 700;
+}
 
 .PracticeContent ul ul {
-  margin-top: 6px;
-  margin-bottom: 6px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  padding-left: 16px;
 }
 
-/* Legacy selectors */
-.separatePracticeContainer li {
-  font-style: normal;
-  color: var(--textMuted);
-}
+.PracticeContent ul ul li::before { content: "·"; }
 
 .MainHeadingContainer { display: none; }
 
@@ -189,14 +298,15 @@
     max-height: none;
     border-right: none;
     border-bottom: 1px solid var(--border);
-    padding: 20px 0;
   }
+
+  .PracticeSidebarHeader { padding: 20px 24px 14px; }
 
   .PracticeSidebar ul {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    padding: 12px 16px;
+    padding: 12px 24px;
   }
 
   .PracticeSidebar ul li a {
@@ -205,6 +315,7 @@
     border: 1px solid var(--border);
     padding: 6px 14px;
     font-size: 12px;
+    gap: 6px;
   }
 
   .PracticeSidebar ul li a:hover,
@@ -214,11 +325,47 @@
     padding-left: 14px;
   }
 
-  .PracticeContent {
-    padding: 36px 16px 60px;
+  .sidebar-num { display: none; }
+
+  .PracticeSidebarCTA {
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-direction: row;
   }
 
-  .PracticeImageContainer img { height: 200px; }
+  .PracticeSidebarCTA > p { margin: 0; white-space: nowrap; }
+  .PracticeSidebarCTABtn { width: auto; }
 
-  .PracticeBreadcrumb { padding: 12px 16px; }
+  .PracticeContent { padding: 36px 24px 60px; }
+  .PracticeImageContainer img { height: 260px; }
+  .PracticeBreadcrumb { padding: 12px 24px; }
+  .PracticePageHeader { padding: calc(var(--navHeight) + 32px) 0 48px; }
+}
+
+@media (max-width: 768px) {
+  .PracticePageHeader h1 { font-size: 26px; }
+  .PracticePageHeader p { font-size: 14px; }
+  .PracticePageHeader { padding: calc(var(--navHeight) + 24px) 0 40px; }
+}
+
+@media (max-width: 480px) {
+  .PracticeSidebarCTA { flex-direction: column; align-items: flex-start; }
+  .PracticeSidebarCTABtn { width: 100%; }
+  .PracticeSidebar ul { padding: 10px 16px; gap: 5px; }
+  .PracticeSidebar ul li a { font-size: 11px; padding: 5px 12px; }
+
+  .PracticeContent { padding: 24px 16px 48px; }
+  .PracticeContent p { font-size: 14px; }
+  .PracticeContent p b, .PracticeContent p strong { font-size: 16px; }
+  .PracticeContent ul li { font-size: 13px; }
+
+  .PracticeImageContainer img { height: 190px; border-radius: 8px; }
+
+  .PracticeBreadcrumb { padding: 10px 16px; }
+  .PracticeBreadcrumb nav { font-size: 11px; }
+
+  .PracticePageHeader { padding: calc(var(--navHeight) + 16px) 0 32px; }
+  .PracticePageHeader h1 { font-size: 22px; }
 }
