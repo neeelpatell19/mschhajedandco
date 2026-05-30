@@ -1,174 +1,163 @@
-import React, { useState, useEffect } from "react";
-import { Drawer, Button, Menu, Dropdown, Space, Collapse } from "antd";
+import React, { useState, useEffect, useRef } from "react";
+import { Drawer, Button, Menu, Dropdown, Collapse } from "antd";
 import { DownOutlined } from "@ant-design/icons";
-import Navigationlinks from "./NavigationLinksData";// Assuming Navigationlinks file is imported here
+import Navigationlinks from "./NavigationLinksData";
 import "../../assets/Styles/NavigationBar.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const { Panel } = Collapse;
 
+// Pages whose first section has a dark (navy) background — transparent nav is correct there
+const DARK_HERO_PATHS = ["/", "/about-us", "/careers", "/insights-newsroom"];
+
 const NavigationBar = () => {
     const [scrollingDown, setScrollingDown] = useState(false);
-    const [lastScrollY, setLastScrollY] = useState(0);
+    const [scrolled, setScrolled] = useState(false);
+    const lastScrollY = useRef(0);
     const [drawerVisible, setDrawerVisible] = useState(false);
-    const [scrollPosition, setScrollPosition] = useState(0);
+    const location = useLocation();
 
+    // Sync nav state on every route change
+    useEffect(() => {
+        const isDarkHeroPage = DARK_HERO_PATHS.includes(location.pathname);
+        const currentY = window.scrollY;
+
+        if (!isDarkHeroPage) {
+            // Detail pages (practices, blog article) — start white immediately
+            setScrolled(true);
+        } else {
+            setScrolled(currentY > 60);
+        }
+
+        setScrollingDown(false);
+        lastScrollY.current = currentY;
+    }, [location.pathname]);
+
+    // Scroll listener
     useEffect(() => {
         const handleScroll = () => {
-            const currentScrollPos = window.scrollY;
-            setScrollPosition(currentScrollPos);
-            setScrollingDown(currentScrollPos > 200);
+            const current = window.scrollY;
+
+            setScrolled(current > 60);
+
+            if (current > 120) {
+                setScrollingDown(current > lastScrollY.current);
+            } else {
+                setScrollingDown(false);
+            }
+
+            lastScrollY.current = current;
         };
 
-        window.addEventListener("scroll", handleScroll);
+        window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    const handleScroll = () => {
-        if (window.scrollY > lastScrollY) {
-            setScrollingDown(true);
-        } else {
-            setScrollingDown(false);
-        }
-        setLastScrollY(window.scrollY);
-    };
-
-    const toggleDrawer = () => {
-        setDrawerVisible(!drawerVisible);
-    };
-
-    const handleCloseDrawer = () => {
-        setDrawerVisible(false);
-    };
-
-    const handleMobileMenuItemClick = (key) => {
-        // Close the drawer when an item is clicked (optional)
-        setDrawerVisible(false);
-    };
+    const toggleDrawer = () => setDrawerVisible(v => !v);
+    const closeDrawer  = () => setDrawerVisible(false);
 
     const renderDropdownMenu = (subLinks) => (
         <Menu>
             {subLinks.map((subLink, index) => (
-                <Link to={`/practices/${subLink.path}`} style={{ background: "transparent" }}><Menu.Item key={index}>{subLink.link}</Menu.Item></Link>
+                <Link key={index} to={`/practices/${subLink.path}`}>
+                    <Menu.Item key={index}>{subLink.link}</Menu.Item>
+                </Link>
             ))}
         </Menu>
     );
 
-    useEffect(() => {
-        window.addEventListener("scroll", handleScroll);
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    }, [lastScrollY]);
-
-    const renderNavigationLinks = () => {
-        return Navigationlinks.map((navItem, index) => {
+    const renderDesktopLinks = () =>
+        Navigationlinks.map((navItem, index) => {
             if (navItem.subLinks) {
                 return (
                     <Dropdown
-                        overlay={renderDropdownMenu(navItem.subLinks)}
-                        trigger={['hover']}
                         key={index}
-                        style={{ background: "transparent" }}
+                        overlay={renderDropdownMenu(navItem.subLinks)}
+                        trigger={["hover"]}
                     >
-
                         <Button className="navButton">
-                            {navItem.link} <DownOutlined />
+                            {navItem.link} <DownOutlined style={{ fontSize: 9, marginLeft: 4 }} />
                         </Button>
-
                     </Dropdown>
                 );
-            } else {
-                return (
-                    <Button className="navButton" key={index}>
-                        <Link to={navItem.path}>{navItem.link}</Link>
-                    </Button>
-                );
             }
+            return (
+                <Button className="navButton" key={index}>
+                    <Link to={navItem.path}>{navItem.link}</Link>
+                </Button>
+            );
         });
-    };
 
-    const renderMobileNavigationLinks = () => {
-        return Navigationlinks.map((navItem, index) => (
-            <Collapse accordion>
-            {/* {Navigationlinks.map((navItem, index) => ( */}
-                <Panel 
+    const renderMobileLinks = () =>
+        Navigationlinks.map((navItem, index) => (
+            <Collapse accordion key={index}>
+                <Panel
                     header={
                         navItem.subLinks ? (
-                            // If subLinks exist, header is just a title (no direct link)
                             <span className="mobileNavHeader">{navItem.link}</span>
                         ) : (
-                            // If no subLinks, header is a clickable link
-                            <Link
-                                to={navItem.path}
-                                className="mobileNavHeaderLink"
-                                onClick={handleCloseDrawer}
-                            >
+                            <Link to={navItem.path} className="mobileNavHeaderLink" onClick={closeDrawer}>
                                 {navItem.link}
                             </Link>
                         )
                     }
                     key={index}
                 >
-                    {navItem.subLinks && 
+                    {navItem.subLinks &&
                         navItem.subLinks.map((subLink, idx) => (
-                            <Button
-                                key={idx}
-                                type="link"
-                                className="mobileNavSubLink"
-                                onClick={handleCloseDrawer}
-                            >
+                            <Button key={idx} type="link" onClick={closeDrawer}>
                                 <Link to={`/practices/${subLink.path}`}>{subLink.link}</Link>
                             </Button>
                         ))
                     }
                 </Panel>
-            {/* ))} */}
-        </Collapse>
+            </Collapse>
         ));
-    };
+
+    const navClass = [
+        scrolled ? "scrolled" : "",
+        scrollingDown ? "hide" : "show",
+    ].join(" ");
 
     return (
-        <>
-            <section
-                id="NavigationBarContainer"
-                className={scrollingDown ? "hide" : "show"}
+        <section id="NavigationBarContainer" className={navClass}>
+            <div className="NavigationBarMainContainer">
 
-
-            >
-                <div className="NavigationBarMainContainer">
-                    <div className="LogoContainer">
-                        <Link to="/"><img src="https://mschhajedandco.com/wp-content/uploads/2020/09/MS-Logo.png" alt="" /></Link>
-                    </div>
-
-                    {/* Desktop Navigation Links */}
-                    <div className="NavigationLinksContainer">
-                        {renderNavigationLinks()}
-                    </div>
-
-                    {/* Mobile Navigation Drawer */}
-                    <div className="ContactInfoContainer">
-                        <Button
-                            className="menuButton"
-                            type="primary"
-                            onClick={toggleDrawer}
-                        >
-                            Menu
-                        </Button>
-
-                        <Drawer
-                            title="Navigation"
-                            placement="right"
-                            onClose={handleCloseDrawer}
-                            visible={drawerVisible}
-                            width={300}
-                        >
-                            {renderMobileNavigationLinks()}
-                        </Drawer>
-                    </div>
+                {/* Logo */}
+                <div className="LogoContainer">
+                    <Link to="/">
+                        <img
+                            src="https://mschhajedandco.com/wp-content/uploads/2020/09/MS-Logo.png"
+                            alt="M.S. Chhajed & Co."
+                        />
+                    </Link>
                 </div>
-            </section>
-        </>
+
+                {/* Desktop Nav */}
+                <div className="NavigationLinksContainer">
+                    {renderDesktopLinks()}
+                    <button className="NavCTABtn">Get in Touch</button>
+                </div>
+
+                {/* Mobile Hamburger */}
+                <div>
+                    <Button className="menuButton" onClick={toggleDrawer}>
+                        Menu
+                    </Button>
+
+                    <Drawer
+                        title="M.S. Chhajed & Co."
+                        placement="right"
+                        onClose={closeDrawer}
+                        open={drawerVisible}
+                        width={300}
+                    >
+                        {renderMobileLinks()}
+                    </Drawer>
+                </div>
+
+            </div>
+        </section>
     );
 };
 

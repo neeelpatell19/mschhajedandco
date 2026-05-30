@@ -1,9 +1,23 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import "./PracticeSeparate.css"
-import TRANSACTIONADVISORY from "./TRANSACTION-ADVISORY.jpeg"
+import { useParams, Link } from "react-router-dom";
+import "./PracticeSeparate.css";
+import { motion } from "framer-motion";
+import TRANSACTIONADVISORY from "./TRANSACTION-ADVISORY.jpeg";
+const allPractices = [
+    { label: "India Strategy — Doing Business in India", path: "india-strategy-doing-business-india" },
+    { label: "Start-Up Services",                        path: "start-up-services"                   },
+    { label: "Assurances",                              path: "assurances"                           },
+    { label: "Transaction Advisory",                    path: "transaction-advisory"                 },
+    { label: "Direct Taxes",                            path: "direct-taxes"                         },
+    { label: "Goods and Service Tax",                   path: "goods-and-services-tax"               },
+    { label: "Transfer Pricing",                        path: "transfer-pricing"                     },
+    { label: "Knowledge Process Outsourcing",           path: "knowledge-process-outsourcing"        },
+    { label: "Commercial and Legal Assistance",         path: "commercial-and-legal-assistance"      },
+];
+
 const PracticesSeparate = () => {
     const { practiceName } = useParams();
+    const activeLabel = allPractices.find(p => p.path === practiceName)?.label || "Practice";
 
     // Define the dynamic content for each practice
     const practiceContent = {
@@ -53,26 +67,49 @@ const PracticesSeparate = () => {
                     <h2>START UP SERVICES</h2>
                     <img src="/Images/START UP SERVICES.jpg" alt="" />
                 </div>
-                <p>
-                    The business environment worldwide is changing rapidly, along with dynamic laws, regulations, and economic conditions. Extensive disclosures requiring detailed analysis of financial statements are mandated under various statutes, placing significant importance on independent statutory audits. Financial statements serve as the ultimate report card of a company’s fiscal performance. They enable owners and managers to pursue their business objectives, whether related to raising capital, acquisitions, divestitures, or restructuring. Furthermore, meeting investor expectations begins with the completeness, accuracy, and fair presentation of information in your financial statements and disclosures.
-
-                </p>
-                <p>An audit is key to sustaining confidence in both your company and the financial system at large. It must keep pace with a fast-evolving corporate reporting environment—characterized by investor scepticism and the 24/7 scrutiny of corporate information, including non-financial data. Auditing, therefore, involves much more than just the legal obligation of certifying annual accounts.</p>
-                <p>At M. S. Chhajed, we have a longstanding track record of providing indisputable assurance to our esteemed clients on various matters. Our belief that audit and assurance services are a ‘profit centre’ rather than a ‘cost centre’ has been endorsed by our clients, as evidenced by our decades-long associations with them. We deliver tailor-made assurance services, accentuated by impeccable quality, to our clients in both local and global markets. Our focus is on assisting clients in navigating complex professional requirements with clarity and agility. This approach helps provide valuable insights into their businesses with customized solutions.</p>
+                <p>India’s start-up ecosystem is one of the fastest-growing in the world, presenting entrepreneurs with unprecedented opportunities. However, the regulatory and compliance environment can be complex to navigate, especially for founders focused on building their products and scaling their businesses.</p>
+                <p>At M. S. Chhajed & Co., we understand the unique challenges faced by start-ups at every stage — from ideation to growth to fundraising. We serve as a trusted partner, providing comprehensive advisory and compliance services that allow founders to focus on what they do best: building great businesses.</p>
+                <p>Our dedicated start-up practice covers end-to-end support across the lifecycle of your venture. Whether you are incorporating your first entity, structuring an ESOP policy, raising venture capital, or planning an exit, we have the expertise to guide you.</p>
                 <br />
-                <p>Our assurance team has considerable experience and expertise in providing:</p>
+                <p>Our Start-Up Services include:</p>
+                <p><b>Incorporation and Entity Structuring</b></p>
                 <ul>
-                    <li>Audit of financial statements prepared in accordance with various GAAPs (Ind-GAAP, IND-AS, IFRS) under applicable auditing standards.</li>
-                    <li>Review of financial statements in accordance with various GAAPs (Ind-GAAP, IND-AS, IFRS) under applicable auditing standards.</li>
-                    <li> ⁠Internal Audit and Pre-Audit.</li>
-                    <li>Management Audit.</li>
-                    <li>Due Diligence.</li>
-                    <li>⁠Forensic Audit.</li>
-                    <li>⁠Stock Audit.</li>
-                    <li>Secretarial and other Company Law Compliance Audits.</li>
-                    <li>Fixed asset reconciliation and management.</li>
-                    <li>IT Audit.</li>
-                    <li>⁠Attestation and Certification services.</li>
+                    <li>Selection of appropriate business structure (Private Limited Company, LLP, OPC, etc.)</li>
+                    <li>Company incorporation and registration with the Registrar of Companies</li>
+                    <li>Drafting Memorandum and Articles of Association</li>
+                    <li>Registration under DPIIT for start-up recognition and tax benefits</li>
+                    <li>PAN, TAN, GST, MSME, and other statutory registrations</li>
+                </ul>
+                <p><b>Regulatory and Compliance Advisory</b></p>
+                <ul>
+                    <li>Annual filings with the Ministry of Corporate Affairs</li>
+                    <li>Secretarial compliance and maintenance of statutory registers</li>
+                    <li>Labour law registrations (PF, ESIC, Shops & Establishments)</li>
+                    <li>FEMA compliance for foreign investment and cross-border transactions</li>
+                    <li>RBI filings for FDI, ECB, and ODI transactions</li>
+                </ul>
+                <p><b>Fundraising and Investor Relations</b></p>
+                <ul>
+                    <li>Structuring seed, angel, and venture capital rounds</li>
+                    <li>Drafting and reviewing term sheets, SHA, and SSA</li>
+                    <li>Valuation of shares for regulatory and fundraising purposes</li>
+                    <li>Due diligence support (financial, legal, and tax)</li>
+                    <li>Assistance with convertible notes and SAFE instruments</li>
+                </ul>
+                <p><b>Tax Planning and Advisory</b></p>
+                <ul>
+                    <li>Tax structuring for founders, employees, and investors</li>
+                    <li>ESOP design, valuation, and tax advisory</li>
+                    <li>Section 80IAC tax exemption for eligible start-ups</li>
+                    <li>Angel tax advisory and exemption filings</li>
+                    <li>GST registration, advisory, and periodic compliance</li>
+                </ul>
+                <p><b>Accounting and Bookkeeping</b></p>
+                <ul>
+                    <li>Monthly bookkeeping and management accounts</li>
+                    <li>Payroll processing and statutory deductions</li>
+                    <li>Financial modelling and projections</li>
+                    <li>MIS reporting and investor-ready financial statements</li>
                 </ul>
             </>
         ),
@@ -277,6 +314,10 @@ const PracticesSeparate = () => {
         ),
         "goods-and-services-tax": (
             <>
+                <div className="PracticeImageContainer">
+                    <h2>GOODS AND SERVICE TAX</h2>
+                    <img src="/Images/GST.jpg" alt="" />
+                </div>
                 <p>Taxes ultimately borne by final consumers are called Indirect Taxes. Generally, any transaction involving goods or services attracts various indirect taxes. Indirect taxes are typically passed on to the final consumer. However, if a business entity fails to anticipate the applicability of an indirect tax and does not recover the same from the consumer, it becomes a cost to the entity and directly impacts its bottom line. Consequently, indirect taxes have a significant bearing on costs, pricing policies, cash flow, profitability, and ultimately the competitiveness of an organization. Therefore, it becomes critical to evaluate the impact of various indirect taxes on any given transaction.</p>
                 <p>Historically, India divided the power to tax various transactions between the Union and the States. This was particularly true for indirect taxes such as excise duty, service tax, sales tax, and value-added tax (VAT). This division resulted in different taxes being applied by the Central and State tax departments on sales and service transactions. These taxes were non-deductible against one another and varied in terms of rates, compliance requirements, and assessment procedures. Apart from cascading taxation, this system created several inefficiencies within businesses as they tried to ensure tax effectiveness.</p>
                 <p>These challenges were addressed with the implementation of a uniform Goods and Services Tax (GST) regime in July 2017. The new regime aims to bring greater transparency and fairness while introducing a robust compliance system. Though the GST regime is relatively complex and involves significant procedural requirements, it has ensured that most transactions are tax-neutral and has allowed companies to focus on their business operations rather than tax efficiency models.</p>
@@ -441,10 +482,10 @@ const PracticesSeparate = () => {
 
             </>
         ),
-        "Commertial-and-legal-assistance": (
+        "commercial-and-legal-assistance": (
             <>
                 <div className="PracticeImageContainer">
-                    <h2>Commertial and Legal Assistance</h2>
+                    <h2>Commercial and Legal Assistance</h2>
                     <img src="/Images/Commercial and ligal assistent in accounting.jpg" alt="" />
                 </div>
                 <p>At M. S. Chhajed & Co., our focus extends beyond legal intricacies. We assess the financial implications of each agreement or document for all parties involved, both in the short and long term, while considering tax and other related consequences. Our range of commercial and legal assistance services includes:</p>
@@ -500,13 +541,50 @@ const PracticesSeparate = () => {
     }, []);
     return (
         <div id="separatePracticeContainer">
-            <div className="ContainerDefault separatePracticeContainer">
-                {/* <h1 className="MainHeadingContainer">{practiceContent[practiceName] ? practiceContent[practiceName].props.children[0] : "Practice Not Found"}</h1> */}
-                <div >
+
+            {/* Breadcrumb */}
+            <div className="PracticeBreadcrumb">
+                <nav>
+                    <Link to="/">Home</Link>
+                    <span>/</span>
+                    <Link to="/">Practices</Link>
+                    <span>/</span>
+                    <strong>{activeLabel}</strong>
+                </nav>
+            </div>
+
+            {/* Sidebar + Content */}
+            <div className="PracticePageLayout">
+
+                {/* Sidebar */}
+                <aside className="PracticeSidebar">
+                    <h4>Practices</h4>
+                    <ul>
+                        {allPractices.map((p, i) => (
+                            <li key={i}>
+                                <Link
+                                    to={`/practices/${p.path}`}
+                                    className={practiceName === p.path ? "active" : ""}
+                                >
+                                    {p.label}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </aside>
+
+                {/* Main content */}
+                <motion.div
+                    className="PracticeContent"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.75, ease: [0.22,1,0.36,1], delay: 0.15 }}
+                >
                     {practiceContent[practiceName] || (
-                        <p>Sorry, no content available for this practice.</p>
+                        <p>Content for this practice is coming soon.</p>
                     )}
-                </div>
+                </motion.div>
+
             </div>
         </div>
     );

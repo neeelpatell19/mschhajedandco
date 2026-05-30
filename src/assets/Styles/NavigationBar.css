@@ -1,163 +1,332 @@
+/* ─── Navigation Bar ─────────────────────────────────────────────── */
 #NavigationBarContainer {
-    padding: 0px 50px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.251);
-    height: 90px;
-    max-width: 100%;
-    position: fixed;
-    left: 0px;
-    right: 0px;
-    top: 0;
-    z-index: 100;
-    transition: top 0.3s ease-in-out;
-    background-color: var(--sectionColor);
-    /* Smooth transition */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--navHeight);
+  padding: 0 50px;
+  z-index: 1000;
+  background: transparent;
+  transition: background 0.45s ease, box-shadow 0.45s ease, top 0.40s ease;
 }
 
+/* Scrolled: white + blur */
+#NavigationBarContainer.scrolled {
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  box-shadow: 0 1px 0 var(--border), 0 3px 0 var(--navy);
+}
+
+/* Nav links go dark on white background */
+#NavigationBarContainer.scrolled .navButton {
+  color: var(--text) !important;
+}
+
+#NavigationBarContainer.scrolled .navButton a {
+  color: var(--text) !important;
+}
+
+#NavigationBarContainer.scrolled .navButton:hover {
+  color: var(--navy) !important;
+}
+
+#NavigationBarContainer.scrolled .navButton:hover a {
+  color: var(--navy) !important;
+}
+
+#NavigationBarContainer.scrolled .NavCTABtn {
+  border-color: var(--navy);
+  color: var(--navy);
+}
+
+#NavigationBarContainer.scrolled .NavCTABtn:hover {
+  background: var(--navy);
+  color: white;
+}
+
+#NavigationBarContainer.scrolled .menuButton {
+  border-color: rgba(0,0,0,0.18) !important;
+  color: var(--text) !important;
+}
+
+/* Hide / show on scroll direction */
 #NavigationBarContainer.hide {
-    top: -90px;
-    transition: .5s;
-    /* Move the navbar up to hide it */
+  top: calc(-1 * var(--navHeight));
 }
 
 #NavigationBarContainer.show {
-    top: 0;
-    transition: .5s;
-    /* Keep the navbar at the top when visible */
+  top: 0;
 }
 
+/* ─── Layout ─────────────────────────────────────────────────────── */
 .NavigationBarMainContainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
 }
 
+/* ─── Logo ───────────────────────────────────────────────────────── */
+.LogoContainer img {
+  width: 130px;
+  padding: 7px 10px;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 6px;
+  transition: opacity 0.3s ease;
+}
+
+.LogoContainer img:hover { opacity: 0.85; }
+
+/* ─── Desktop Links ──────────────────────────────────────────────── */
 .NavigationLinksContainer {
-    display: flex;
-    gap: 20px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
 }
 
 .navButton {
-    background: transparent !important;
-    border: none;
-    color: white;
-    font-size: 16px;
-    padding: 10px;
-    position: relative;
+  position: relative !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: rgba(255, 255, 255, 0.80) !important;
+  font-family: "Roboto", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.13em !important;
+  text-transform: uppercase;
+  padding: 8px 14px !important;
+  height: auto !important;
+  line-height: 1 !important;
+  cursor: pointer;
+  transition: color 0.28s ease !important;
 }
 
-.navButton a {
-    background-color: transparent !important;
+/* Underline grows from left on hover */
+.navButton::after {
+  content: "";
+  position: absolute;
+  bottom: 1px;
+  left: 14px;
+  right: 14px;
+  height: 1.5px;
+  background: var(--navy);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .navButton:hover {
-    color: var(--brandColor) !important;
+  color: white !important;
 }
 
-.navButton:hover::before {
-    content: "";
-    height: 2px;
-    width: 100%;
-    position: absolute;
-    bottom: -30px;
-    display: inline-block;
-    background-color: white;
+.navButton:hover::after {
+  transform: scaleX(1);
 }
 
-.menuButton {
-    display: none;
-    /* Hide menu button on desktop */
+.navButton a {
+  color: inherit !important;
+  background: transparent !important;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  font-size: 11px;
+  font-weight: 700;
 }
 
-.ant-dropdown {
-    padding-top: 26px;
+/* ─── Contact CTA ────────────────────────────────────────────────── */
+.NavCTABtn {
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 22px;
+  border: 1.5px solid rgba(255, 255, 255, 0.28);
+  border-radius: 40px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.85);
+  font-family: "Roboto", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-left: 14px;
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
 }
+
+.NavCTABtn:hover {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: white;
+  transform: translateY(-1px);
+}
+
+/* ─── Ant Design Dropdown ────────────────────────────────────────── */
+.ant-dropdown { padding-top: 18px; }
 
 .ant-dropdown-menu {
-    padding: 20px !important;
+  padding: 10px 0 !important;
+  border-radius: 14px !important;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.22) !important;
+  background: rgba(14, 15, 26, 0.97) !important;
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  min-width: 290px;
+  border: 1px solid rgba(255, 255, 255, 0.07) !important;
 }
 
 .ant-dropdown-menu .ant-dropdown-menu-item {
-    padding: 10px 0px !important;
-    font-size: 18px;
-    transition: .5s;
+  padding: 12px 24px !important;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px !important;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.70) !important;
+  background: transparent !important;
+  transition: color 0.22s ease, padding-left 0.22s ease !important;
 }
 
 .ant-dropdown-menu .ant-dropdown-menu-item:hover {
-    transition: .5s;
-    transform: translateX(10px);
-    color: var(--brandColor) !important;
-    background-color: transparent !important;
-    font-weight: 600;
+  color: white !important;
+  padding-left: 32px !important;
+  background: transparent !important;
 }
 
-.ant-dropdown-menu-item {
-    background-color: transparent !important;
+.ant-dropdown-menu-item-active {
+  background: transparent !important;
 }
 
-.LogoContainer {
-    display: flex;
-    align-items: center;
+/* ─── Mobile ─────────────────────────────────────────────────────── */
+.menuButton {
+  display: none;
 }
 
-.LogoContainer img {
-    background: rgba(255, 255, 255, 0.827);
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.5);
-    padding: 10px;
-    width: 150px;
+/* Ant Drawer overrides — light */
+.ant-drawer-header {
+  background: var(--white) !important;
+  border-bottom: 1px solid var(--border) !important;
+  padding: 20px 24px !important;
 }
 
-/* Mobile Styling */
+.ant-drawer-title {
+  color: var(--navy) !important;
+  font-family: "Prata", serif !important;
+  font-size: 18px !important;
+}
+
+.ant-drawer-close {
+  color: var(--textMuted) !important;
+}
+
+.ant-drawer-body {
+  background: var(--white) !important;
+  padding: 20px 24px !important;
+}
+
+.ant-drawer-body .ant-collapse {
+  border: none !important;
+  background: transparent !important;
+}
+
+.ant-drawer-body .ant-collapse-item {
+  border-bottom: 1px solid var(--border) !important;
+  background: transparent !important;
+}
+
+.ant-drawer-body .ant-collapse-header {
+  color: var(--text) !important;
+  font-family: "Roboto", sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.13em !important;
+  text-transform: uppercase !important;
+  padding: 18px 0 !important;
+  background: transparent !important;
+}
+
+.ant-drawer-body .ant-collapse-content {
+  background: transparent !important;
+  border-top: none !important;
+}
+
+.ant-drawer-body .ant-collapse-content-box {
+  padding: 0 0 14px !important;
+}
+
+.ant-collapse-content .ant-btn {
+  display: block !important;
+  text-align: left !important;
+  height: auto !important;
+  padding: 8px 16px !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.ant-collapse-content .ant-btn a {
+  color: var(--textMuted) !important;
+  font-size: 12px !important;
+  font-family: "Roboto", sans-serif !important;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  transition: color 0.22s ease;
+}
+
+.ant-collapse-content .ant-btn:hover a {
+  color: var(--navy) !important;
+}
+
+.mobileNavHeaderLink {
+  color: var(--text) !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  font-family: "Roboto", sans-serif !important;
+  letter-spacing: 0.13em !important;
+  text-transform: uppercase !important;
+}
+
+/* Suppress collapse arrow for non-dropdown items */
+.ant-drawer-body .ant-collapse .ant-collapse-item .ant-collapse-expand-icon {
+  opacity: 0;
+}
+
+.ant-drawer-body .ant-collapse:nth-child(2) .ant-collapse-item .ant-collapse-expand-icon {
+  opacity: 1;
+  color: var(--textMuted) !important;
+}
+
+.ant-drawer-body .ant-collapse:first-child .ant-collapse-content,
+.ant-drawer-body .ant-collapse:nth-child(3) .ant-collapse-content,
+.ant-drawer-body .ant-collapse:nth-child(4) .ant-collapse-content {
+  display: none;
+}
+
 @media (max-width: 768px) {
-    .ant-drawer-body .ant-collapse {
-        border: 0px solid transparent;
-        background-color: transparent;
-    }
-    .ant-drawer-body .mobileNavHeaderLink{
-        color: black;
-    }
+  #NavigationBarContainer {
+    padding: 0 16px;
+  }
 
-    .ant-collapse-content .ant-btn a{
-        color: black;
-    }
-    .ant-drawer-body .ant-collapse:nth-child(2) .ant-collapse-item .ant-collapse-expand-icon{
-      opacity: 1;
-    }
-    .ant-drawer-body .ant-collapse .ant-collapse-item .ant-collapse-expand-icon {
-        opacity: 0;
-    }
+  .NavigationLinksContainer {
+    display: none;
+  }
 
-    .ant-drawer-body .ant-collapse:first-child .ant-collapse-content {
-        display: none;
-    }
+  .menuButton {
+    display: block;
+    background: transparent !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.30) !important;
+    color: white !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.10em;
+    padding: 7px 18px !important;
+    border-radius: 40px !important;
+    height: auto !important;
+    box-shadow: none !important;
+    transition: background 0.3s ease, border-color 0.3s ease !important;
+  }
 
-    .ant-drawer-body .ant-collapse:nth-child(3) .ant-collapse-content,
-    .ant-drawer-body .ant-collapse:nth-child(4) .ant-collapse-content {
-        display: none;
-    }
-
-    .NavigationLinksContainer {
-        display: none;
-        /* Hide normal links on mobile */
-    }
-
-    .menuButton {
-        display: block;
-        /* Show menu button on mobile */
-    }
-
-    #NavigationBarContainer {
-        padding: 0px 15px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.251);
-        height: 90px;
-        max-width: 100%;
-        position: fixed;
-        left: 0px;
-        right: 0px;
-        top: 0;
-        z-index: 100;
-        transition: top 0.3s ease-in-out;
-        background-color: var(--sectionColor);
-        /* Smooth transition */
-    }
+  .menuButton:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(255, 255, 255, 0.55) !important;
+  }
 }

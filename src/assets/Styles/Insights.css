@@ -1,71 +1,159 @@
-/* #InSightsContainer {
-    padding-top: 120px;
-} */
-
-.InsightsHeaderContainer h1 {
-    font-size: 45px;
-    font-weight: 600;
-    margin-top: 0px;
-    /* color: #071D96; */
-    text-align: center;
-
+/* ─── Insights (Home Preview) ────────────────────────────────────── */
+#InSightsContainer {
+  background: var(--surface);
+  padding: 100px 0 120px;
 }
 
+/* ─── Header ─────────────────────────────────────────────────────── */
+.InsightsHeaderRow {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 52px;
+  gap: 24px;
+}
+
+.InsightsHeaderRow .insights-label {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.InsightsHeaderRow h1 {
+  font-size: clamp(28px, 3vw, 46px);
+  font-weight: 400;
+  color: var(--text);
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.InsightsHeaderRow .view-all-link {
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--navy);
+  white-space: nowrap;
+  align-self: flex-end;
+  padding-bottom: 6px;
+  border-bottom: 1.5px solid transparent;
+  transition: border-color 0.25s ease;
+  text-decoration: none;
+}
+
+.InsightsHeaderRow .view-all-link:hover {
+  border-color: var(--navy);
+}
+
+/* ─── Blog Card ──────────────────────────────────────────────────── */
+.BlogPostCardContainer {
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.38s ease;
+  border: 1px solid var(--border);
+  cursor: pointer;
+}
+
+.BlogPostCardContainer:hover {
+  transform: translateY(-7px);
+  box-shadow: var(--shadowLg);
+}
+
+/* Image */
 .BlogPostImageContainer {
-    height: 450px;
-    /* width: 100%; */
-    overflow: hidden;
-    /* padding: 20px; */
+  height: 280px;
+  overflow: hidden;
+  flex-shrink: 0;
 }
-
 
 .BlogPostImageContainer img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: .5s;
-}
-
-.BlogPostCardContainer {
-    background-color: #efefef;
-    height: 100%;
-    transition: .5s;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.60s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .BlogPostCardContainer:hover .BlogPostImageContainer img {
-    transform: scale(1.1);
-    transition: .5s;
+  transform: scale(1.06);
 }
 
-#InSightsContainer .ant-row .ant-col {
-    padding: 10px;
+/* Content */
+.BlogPostContentContainer {
+  padding: 24px 24px 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Tag pill */
+.BlogTagPill {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 40px;
+  background: var(--navyLight);
+  color: var(--navy);
+  font-family: "Roboto", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  width: fit-content;
 }
 
 .BlogPostContentContainer h2 {
-    font-size: var(--secondSectionHeading);
-    color: black;
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text);
+  margin: 0 0 16px;
+  line-height: 1.35;
+  flex: 1;
 }
 
-.BlogPostContentContainer {
-    padding: 20px;
+.BlogPostMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
 }
 
-.BlogPostContentContainer hr {
-    opacity: 1;
-    border: 1px solid white;
+.BlogPostMeta p {
+  font-size: 12px;
+  color: var(--textMuted);
+  font-weight: 500;
 }
 
-@media (max-width:900px) {
-    #InSightsContainer .ant-row .ant-col {
-        padding: 10px 0px;
-    }
+/* Remove old hr */
+.BlogPostContentContainer hr { display: none; }
 
-.InsightsHeaderContainer h1 {
-    font-size: 40px;
-    font-weight: 600;
-    margin-top: 0px;
-    /* color: #071D96; */
-    text-align: center;
-
+/* Col spacing */
+#InSightsContainer .ant-row .ant-col {
+  padding: 10px;
 }
+
+/* ─── Responsive ─────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  #InSightsContainer {
+    padding: 80px 0 90px;
+  }
+
+  .InsightsHeaderRow {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 36px;
+  }
+
+  #InSightsContainer .ant-row .ant-col {
+    padding: 8px 0;
+  }
+
+  .BlogPostImageContainer { height: 220px; }
 }

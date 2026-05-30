@@ -1,101 +1,73 @@
 import React from "react";
-import { Row, Col } from "antd";
-import "../../assets/Styles/PracticesHomeCards.css"
-import { FaArrowRightLong } from "react-icons/fa6";
+import "../../assets/Styles/PracticesHomeCards.css";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { HiArrowRight } from "react-icons/hi";
+
+const ease = [0.22, 1, 0.36, 1];
+
 const PracticesHomeCards = () => {
 
     const PracticeCardData = [
-        {
-            cardImage: "https://images.unsplash.com/photo-1684512872939-74a65528b829?q=80&w=2831&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            cardTitle: "India Strategy- Doing Business in India",
-            cardContent: "India business advisory and set-up services",
-            practiceName: "india-strategy-doing-business-india",
-        },
-        {
-            cardImage: "https://images.unsplash.com/photo-1529119368496-2dfda6ec2804?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            cardTitle: "Start Up services",
-            cardContent: "Set-up, compliance and business advisory services",
-            practiceName: "start-up-services"
-        },
-        {
-            cardImage: "https://images.unsplash.com/photo-1531973576160-7125cd663d86?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            cardTitle: "Assurances",
-            cardContent: "Statutory audit, tax audit, internal audit and risk assessments",
-            practiceName: "assurances"
-        },
+        { cardTitle: "India Strategy — Doing Business in India", cardContent: "India business advisory and entity set-up services",        practiceName: "india-strategy-doing-business-india" },
+        { cardTitle: "Start-Up Services",                         cardContent: "Incorporation, compliance and business advisory for startups", practiceName: "start-up-services" },
+        { cardTitle: "Assurances",                                cardContent: "Statutory audit, tax audit, internal audit and risk assessments", practiceName: "assurances" },
+        { cardTitle: "Transaction Advisory",                      cardContent: "Financial due diligence, business valuation and model-building", practiceName: "transaction-advisory" },
+        { cardTitle: "Direct Taxes",                              cardContent: "Tax planning, optimisation and filing for corporates",         practiceName: "direct-taxes" },
+        { cardTitle: "Goods and Service Tax",                     cardContent: "GST planning, advisory and compliance services for corporates", practiceName: "goods-and-services-tax" },
+        { cardTitle: "Transfer Pricing",                          cardContent: "Benchmarking studies, documentation, planning and APA advisory", practiceName: "transfer-pricing" },
+        { cardTitle: "Knowledge Process Outsourcing",             cardContent: "Financial accounting and tax compliances for corporates",      practiceName: "knowledge-process-outsourcing" },
+        { cardTitle: "Commercial and Legal Assistance",           cardContent: "Business model building, agreement drafting and negotiations",  practiceName: "commercial-and-legal-assistance" },
+    ];
 
-        {
-            cardImage: "https://images.unsplash.com/photo-1556740772-1a741367b93e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            cardTitle: "Transaction Advisory",
-            cardContent: "Financial due diligence, business valuation and model-building",
-            practiceName: "transaction-advisory"
-        },
-        {
-            cardImage: "https://images.unsplash.com/photo-1635859890085-ec8cb5466806?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            cardTitle: "Direct Taxes",
-            cardContent: "Tax planning, optimisation and filing for corporates",
-            practiceName: "direct-taxes"
-        },
-        {
-            cardImage: "https://images.unsplash.com/photo-1554224155-a1487473ffd9?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            cardTitle: "Goods and Service Tax",
-            cardContent: "GST planning, advisory and compliance services for corporates",
-            practiceName: "goods-and-services-tax"
-        },
-        {
-            cardImage: "https://images.unsplash.com/photo-1615406839587-0276084b72bb?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            cardTitle: "Transfer Pricing",
-            cardContent: "Benchmarking and transfer pricing studies, documentation, planning and advisory",
-            practiceName: "transfer-pricing"
-        },
-        {
-            cardImage: "https://plus.unsplash.com/premium_photo-1726797661357-f7897f35f865?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            cardTitle: "Knowledge Process Outsourcing",
-            cardContent: "Financial accounting and tax compliances for corporates",
-            practiceName: "knowledge-process-outsourcing"
-        },
-        {
-            cardImage: "https://images.unsplash.com/photo-1589994965851-a8f479c573a9?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-            cardTitle: "Commercial and Legal Assistance",
-            cardContent: "Business model building, assistance for agreements and in negotiations",
-            practiceName: "Commertial-and-legal-assistance"
-        },
-    ]
     return (
-        <>
-            <section id="PracticesHomeCardsContainer">
-                <div className="PracticesHomeMainContainer ContainerDefault">
-                    <div>
-                        <h1>PRACTICES</h1>
+        <section id="PracticesHomeCardsContainer">
+            <div className="PracticesHomeMainContainer ContainerDefault">
+
+                {/* Section header */}
+                <motion.div
+                    className="PracticesHeaderRow"
+                    initial={{ opacity: 0, y: 28 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.4 }}
+                    transition={{ duration: 0.65, ease }}
+                >
+                    <div className="practices-label">
+                        <div className="section-label">
+                            <span>What We Do</span>
+                        </div>
+                        <h1>Our Practices</h1>
                     </div>
-                    <Row>
-                        {PracticeCardData.map((item, index) => (
-                            <Col lg={8} md={12} style={{ width: "100%" }} key={index}>
+                    <span className="practice-count">{PracticeCardData.length} Practice Areas</span>
+                </motion.div>
 
-                                <div className="PracticeCardStyleContainer">
-                                    <div className="CardBodyContainer">
-                                        <div className="CardImageHomeContainer">
-                                            <img src={item.cardImage} alt="" />
-                                        </div>
-                                        <div className="CardContentContainer">
-                                            <h4>{item.cardTitle}</h4>
-                                            <p>{item.cardContent}</p>
-                                            <div className="AnimatedBtnContainer">
-                                                <Link to={`/practices/${item.practiceName}`}>
-                                                    <button className="CommonBtnStyle"><FaArrowRightLong />&nbsp;&nbsp;READ MORE&nbsp;&nbsp;<FaArrowRightLong /></button>
-                                                </Link>
-                                            </div>
-                                        </div>
-                                    </div>
-
+                {/* Practice list */}
+                <div className="PracticesList">
+                    {PracticeCardData.map((item, index) => (
+                        <motion.div
+                            key={index}
+                            initial={{ opacity: 0, y: 24 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, amount: 0.1 }}
+                            transition={{ duration: 0.55, ease, delay: index * 0.06 }}
+                        >
+                            <Link to={`/practices/${item.practiceName}`} className="PracticeRow">
+                                <span className="PracticeRowNum">
+                                    {String(index + 1).padStart(2, "0")}
+                                </span>
+                                <div className="PracticeRowContent">
+                                    <p className="PracticeRowTitle">{item.cardTitle}</p>
+                                    <p className="PracticeRowDesc">{item.cardContent}</p>
                                 </div>
-                            </Col>
-                        ))}
-                    </Row>
+                                <HiArrowRight className="PracticeRowArrow" />
+                            </Link>
+                        </motion.div>
+                    ))}
                 </div>
-            </section>
-        </>
-    )
-}
-export default PracticesHomeCards
+
+            </div>
+        </section>
+    );
+};
+
+export default PracticesHomeCards;

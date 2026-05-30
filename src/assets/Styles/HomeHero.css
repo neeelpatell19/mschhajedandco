@@ -1,208 +1,254 @@
+/* ─── Hero ────────────────────────────────────────────────────────── */
 #HomeHeroContainer {
-    background-color: var(--sectionColor);
-    margin-bottom: 300px;
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--navy);
 }
 
-.OverlayBackImageContainer {
-    height: 970px;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-    position: absolute;
+/* Full-bleed background image with slow Ken Burns */
+.HeroBgImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  animation: kenBurns 20s ease-in-out infinite alternate;
+  transform-origin: center center;
 }
 
-.OverlayBackImageContainer img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    transform-origin: center;
-    animation: zoomEffect 1s infinite, rotateEffect 10s infinite;
+/* Minimal overlay — darkens left edge where text is, transparent right */
+.HeroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    rgba(11, 15, 50, 0.78) 0%,
+    rgba(11, 15, 50, 0.45) 45%,
+    rgba(11, 15, 50, 0.12) 100%
+  );
+  z-index: 1;
 }
 
-@keyframes zoomEffect {
-
-    0%{
-        transform: scale(1);
-        /* Normal size */
-    }
-
-    50% {
-        transform: scale(1.1);
-        /* Zoom in slightly */
-    }
-
-    100% {
-        transform: scale(1);
-        /* Zoom in slightly */
-    }
+/* ─── Main Content ───────────────────────────────────────────────── */
+.HomeHeroMainContainer {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: calc(var(--navHeight) + 100px);
+  padding-bottom: 160px;
+  max-width: 780px;
 }
 
-@keyframes rotateEffect {
-    0% {
-        transform: rotateY(0deg);
-        /* Start flat */
-    }
-
-    50% {
-        transform: rotateY(10deg);
-        /* Tilt slightly */
-    }
-
-    100% {
-        transform: rotateY(0deg);
-        /* Return to flat */
-    }
+/* Label */
+.HeroLabel {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 32px;
 }
 
-.DarkOverlayContainer {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    height: 100%;
-    width: 100%;
-    background-color: #000000e6;
-    z-index: 2;
+.HeroLabel::before {
+  content: "";
+  display: block;
+  width: 36px;
+  height: 1.5px;
+  background: rgba(255,255,255,0.45);
+  flex-shrink: 0;
 }
 
-#HomeHeroContainer .HomeHeroMainContainer {
-    height: 800px;
-    padding-top: 170px;
-    position: sticky;
-    z-index: 3;
-    /* width: 100%; */
+.HeroLabel span {
+  font-family: "Roboto", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.60);
 }
 
+/* Headline */
 #HomeHeroContainer .HomeHeroMainContainer h1 {
-    color: var(--WhiteColor);
-    font-size: 66px;
-    margin: 0px;
+  font-size: clamp(44px, 5.5vw, 74px);
+  font-weight: 400;
+  color: #ffffff;
+  margin: 0 0 16px;
+  line-height: 1.07;
+  letter-spacing: -0.025em;
 }
 
+/* Stroke subtitle */
 #HomeHeroContainer .HomeHeroMainContainer h2 {
-    color: transparent;
-    /* Make the fill transparent */
-    -webkit-text-stroke: 0.3px var(--WhiteColor);
-    /* Apply the stroke */
-    font-size: 66px;
-    margin: 8px 0px;
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 400;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.38);
+  margin: 0 0 36px;
+  line-height: 1.1;
 }
 
-#HomeHeroContainer .HeroContainerParagraph p {
-    font-size: 24px;
-    margin-top: 0px;
-    color: var(--WhiteColor);
+/* Tagline */
+.HeroTagline {
+  margin-bottom: 0;
 }
 
-.CompanyInfoRow {
-    padding-top: 70px;
+.HeroTagline p {
+  font-size: 18px;
+  line-height: 1.70;
+  color: rgba(255,255,255,0.65);
+  max-width: 480px;
 }
 
-.ClipPathImageContainer {
-    height: 600px;
-    width: 100%;
-    /* Container width remains 100% */
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 50px;
-    transform: translateY(-300px);
-    /* Initial translateY */
-    transition: transform 1s ease-in-out;
-    /* Apply only translateY transition initially */
-    border-radius: 30px;
+/* ─── CTA Row ────────────────────────────────────────────────────── */
+.HeroCtaRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 40px;
 }
 
-.ClipPathImageContainer img {
-    width: 50%;
-    /* Initial width of the image */
-    transition: width 1s ease-in-out;
-    /* Animate image width */
+.HeroCtaPrimary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 34px;
+  border-radius: 40px;
+  background: var(--navy);
+  color: white;
+  border: 1.5px solid var(--navy);
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.ClipPathImageContainer.animateWidth img {
-    width: 100%;
-    /* Final width of the image */
+.HeroCtaPrimary:hover {
+  background: var(--navyDark);
+  border-color: var(--navyDark);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(27,45,126,0.50);
 }
 
-.ClipPathImageContainer.animateTransform {
-    transform: translateY(0);
-    /* Transition translateY after width completes */
-    transition: transform 2s ease-in-out;
-    /* Transition transform */
+.HeroCtaSecondary {
+  display: inline-flex;
+  align-items: center;
+  padding: 15px 28px;
+  border-radius: 40px;
+  background: transparent;
+  color: rgba(255,255,255,0.80);
+  border: 1.5px solid rgba(255,255,255,0.30);
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease;
 }
 
-.CompanyDetailsContainer {
-    display: flex;
-    gap: 30px;
-    padding-left: 50px;
-
+.HeroCtaSecondary:hover {
+  border-color: rgba(255,255,255,0.70);
+  color: white;
+  background: rgba(255,255,255,0.07);
 }
 
-.CompanyDetailsContainer h2 {
-    font-size: 40px !important;
+/* ─── Stats Strip ────────────────────────────────────────────────── */
+.HeroStatsRow {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-top: 56px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(255,255,255,0.14);
 }
 
-.CompanyDetailsContainer div p {
-    color: var(--WhiteColor);
+.HeroStatItem {
+  padding-right: 44px;
 }
 
-.CompanyDetailsContainer>div:last-child {
-    padding-left: 50px;
+.HeroStatItem:not(:last-child) {
+  margin-right: 44px;
+  border-right: 1px solid rgba(255,255,255,0.14);
 }
 
-/* 
-#HomeHeroContainer .HomeHeroMainContainer .ClipPathImageContainer img{
-    width: 100%;
-} */
-
-@media (max-width:900px) {
-    #AboutCompanyHomeContainer .SectionPadding {
-        padding: 0px !important;
-    }
-
-    #HomeHeroContainer {
-        background-color: var(--sectionColor);
-        margin-bottom: 200px;
-    }
-
-    #HomeHeroContainer .HomeHeroMainContainer h1 {
-        color: var(--WhiteColor);
-        font-size: 45px;
-        margin: 0px;
-    }
-
-    #HomeHeroContainer .HomeHeroMainContainer h2 {
-        color: transparent;
-        /* Make the fill transparent */
-        -webkit-text-stroke: 2px var(--WhiteColor);
-        /* Apply the stroke */
-        font-size: 45px;
-        margin: 8px 0px;
-    }
-
-    .ClipPathImageContainer {
-        height: 300px;
-        width: 100%;
-        /* Container width remains 100% */
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 50px;
-        transform: translateY(-300px);
-        /* Initial translateY */
-        transition: transform 1s ease-in-out;
-        /* Apply only translateY transition initially */
-        border-radius: 30px;
-    }
-
+.HeroStatItem h2 {
+  font-size: 50px !important;
+  color: white !important;
+  -webkit-text-stroke: 0 !important;
+  margin: 0 0 4px !important;
+  line-height: 1 !important;
+  font-weight: 400;
+  animation: none !important;
 }
 
+.HeroStatItem p {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.42);
+  margin: 0;
+}
 
-@media (min-width:1000px) and (max-width:1300px){
-    #HomeHeroContainer {
-        background-color: var(--sectionColor);
-        margin-bottom: 400px;
-    }
+/* ─── Scroll indicator ───────────────────────────────────────────── */
+.HeroScrollIndicator {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  animation: fadeIn 1s ease 1.4s both;
+}
+
+.HeroScrollIndicator span {
+  font-family: "Roboto", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.32);
+}
+
+.HeroScrollIndicator .scroll-arrow {
+  width: 1.5px;
+  height: 38px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.50), transparent);
+  animation: bouncePulse 1.8s ease-in-out infinite;
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  #HomeHeroContainer { min-height: 100svh; }
+
+  .HomeHeroMainContainer {
+    padding-top: calc(var(--navHeight) + 60px);
+    padding-bottom: 120px;
+    max-width: none;
+  }
+
+  #HomeHeroContainer .HomeHeroMainContainer h1 { font-size: 38px; }
+  #HomeHeroContainer .HomeHeroMainContainer h2 { font-size: 30px; }
+
+  .HeroTagline p { font-size: 16px; }
+
+  .HeroStatsRow {
+    margin-top: 36px;
+    padding-top: 28px;
+  }
+
+  .HeroStatItem h2  { font-size: 38px !important; }
+  .HeroStatItem     { padding-right: 28px; }
+  .HeroStatItem:not(:last-child) { margin-right: 28px; }
 }

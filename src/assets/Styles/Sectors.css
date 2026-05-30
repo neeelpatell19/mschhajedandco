@@ -1,51 +1,128 @@
-
-#AnimatedSectorsContainer{
-  padding-bottom: 120px;
+/* ─── Sectors Marquee ────────────────────────────────────────────── */
+#AnimatedSectorsContainer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 72px 0;
+  overflow: hidden;
 }
-.scroll-container {
-    width: 100%;
-    overflow: hidden; /* Hide overflow to create the scroll effect */
-    position: relative;
+
+/* Section label */
+.SectorsSectionLabel {
+  margin: 0 70px 40px;
+}
+
+.SectorsSectionLabel h4 {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-family: "Roboto", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: var(--textMuted);
+  margin: 0;
+}
+
+.SectorsSectionLabel h4::before {
+  content: "";
+  display: inline-block;
+  width: 32px;
+  height: 1.5px;
+  background: var(--navy);
+}
+
+/* ─── Marquee Track ──────────────────────────────────────────────── */
+.sectors-track-wrapper {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+/* Fade edges */
+.sectors-track-wrapper::before,
+.sectors-track-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 120px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.sectors-track-wrapper::before {
+  left: 0;
+  background: linear-gradient(to right, var(--surface), transparent);
+}
+
+.sectors-track-wrapper::after {
+  right: 0;
+  background: linear-gradient(to left, var(--surface), transparent);
+}
+
+.sectors-track {
+  display: flex;
+  gap: 0;
+  width: max-content;
+  animation: marqueeLeft 32s linear infinite;
+}
+
+.sectors-track:hover {
+  animation-play-state: paused;
+}
+
+/* ─── Sector Item ────────────────────────────────────────────────── */
+.sector-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 32px;
+  border-right: 1px solid var(--border);
+  white-space: nowrap;
+  cursor: default;
+  transition: background 0.3s ease;
+}
+
+.sector-item:hover {
+  background: var(--navyLight);
+}
+
+.sector-item img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  opacity: 0.55;
+  transition: opacity 0.3s ease;
+  filter: none;
+}
+
+.sector-item:hover img {
+  opacity: 0.85;
+}
+
+.sector-item p {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--textMuted);
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.sector-item:hover p {
+  color: var(--navy);
+}
+
+@media (max-width: 900px) {
+  .SectorsSectionLabel {
+    margin: 0 16px 32px;
   }
-  
-  .scroll-content {
-    display: flex;
-    animation: scroll-left 30s linear infinite;
-    white-space: nowrap; /* Prevent wrapping */
+
+  .sectors-track-wrapper::before,
+  .sectors-track-wrapper::after {
+    width: 60px;
   }
-  
-  .box {
-    display: inline-flex;
-    align-items: center;
-    margin-right: 30px; /* Space between each box */
-    padding: 10px;
-  }
-  
-  .box img {
-    width: 40px;
-    margin-right: 10px;
-    aspect-ratio: 3/2;
-    object-fit: contain;
-  }
-  
-  .box p {
-    margin: 0;
-    font-size: 22px;
-    font-weight: 500;
-    color: black;
-  }
-  .marquee-content{
-    margin-left: -1200px;
-  }
-  
-  /* Animation to scroll boxes from right to left */
-  @keyframes scroll-left {
-    0% {
-      transform: translateX(100%); /* Start offscreen to the right */
-    }
-    100% {
-      transform: translateX(-100%); /* Move offscreen to the left */
-    }
-  }
-  
- 
+}

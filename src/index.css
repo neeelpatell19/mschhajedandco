@@ -1,126 +1,323 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Prata&family=Sora:wght@100..800&family=Varela+Round&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Prata&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* ─── Design Tokens ──────────────────────────────────────────────── */
+:root {
+  /* Core palette — drawn from the MS Chhajed & Co. logo */
+  --navy:        #1B2D7E;   /* "M. S. Chhajed" — primary dark indigo */
+  --navyDark:    #131F5C;   /* deeper for hover / active             */
+  --navyLight:   rgba(27, 45, 126, 0.10);
+
+  --brand:       #931e95;   /* "& Co." — accent purple, used sparingly */
+  --brandDark:   #7a1880;
+  --brandLight:  rgba(147, 30, 149, 0.10);
+
+  /* Dark bg — slightly navy-tinted for warmth */
+  --dark:        #0B0D1E;
+  --darkAlt:     #0F1228;
+
+  /* Surfaces */
+  --surface:     #FAFAF8;
+  --surfaceAlt:  #F3F2EF;
+  --white:       #FFFFFF;
+
+  /* Text */
+  --text:        #1C1C1E;
+  --textMuted:   #6B7280;
+  --textLight:   rgba(255, 255, 255, 0.88);
+  --textLighter: rgba(255, 255, 255, 0.50);
+
+  /* Borders */
+  --border:      rgba(0, 0, 0, 0.08);
+  --borderMed:   rgba(0, 0, 0, 0.14);
+  --borderDark:  rgba(255, 255, 255, 0.10);
+
+  /* Shadows */
+  --shadowSm:  0 2px 8px rgba(0, 0, 0, 0.07);
+  --shadowMd:  0 8px 32px rgba(0, 0, 0, 0.11);
+  --shadowLg:  0 20px 64px rgba(0, 0, 0, 0.16);
+  --shadowXl:  0 32px 80px rgba(0, 0, 0, 0.22);
+
+  /* Layout */
+  --navHeight:  90px;
+  --radius:     12px;
+  --radiusLg:   24px;
+  --radiusXl:   32px;
+
+  /* Legacy aliases kept for component compatibility */
+  --sectionColor:        #0B0D1E;
+  --FirstFontSize:       48px;
+  --secondSectionHeading: 30px;
+  --paraFont:            18px;
+  --paraColor:           #6B7280;
+  --WhiteColor:          #FFFFFF;
+  --BlackColor:          #1C1C1E;
+  --brandColor:          #931e95;
+}
+
+/* ─── Reset ──────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
 
 body {
-  background-color: white;
-  --sectionColor: #151515;
-  --FirstFontSize: 48px;
-  --secondSectionHeading: 30px;
-  --paraFont: 18px;
-  --paraColor: #464748;
-  --WhiteColor: white;
-  --BlackColor: black;
-  --brandColor: #931e95;
-  margin: 0px;
-  padding: 0px;
-  font-family: "Prata", serif;
-}
-a{
-  text-decoration: none;
+  background-color: var(--white);
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.ContainerDefault {
-  margin: 0px 70px;
-  max-width: 100%;
-}
+a { text-decoration: none; color: inherit; }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
   font-family: "Prata", serif;
+  color: var(--text);
+  line-height: 1.12;
+  margin-top: 0;
 }
 
 p {
-  font-family: "Roboto", serif;
-  margin-bottom: 0;
-  font-size: 18px;
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  font-size: 17px;
   font-weight: 400;
-  line-height: 1.5em;
-  color: var(--paraColor);
+  line-height: 1.70;
+  color: var(--textMuted);
 }
 
 li {
-  font-family: "Roboto", serif;
-  line-height: 30px;
+  font-family: "Roboto", sans-serif;
+  line-height: 1.85;
+  color: var(--textMuted);
 }
 
-.SectionPadding {
-  padding: 2rem 0rem;
+/* ─── Layout ─────────────────────────────────────────────────────── */
+.ContainerDefault {
+  margin: 0 70px;
+  max-width: 100%;
 }
 
-.CommonBtnStyle {
-  text-transform: uppercase;
-  border: none;
-  padding: 8px 10px !important;
-  border-radius: 30px;
-  font-size: 10px;
-  transition: .5s;
+.SectionPadding { padding: 2.5rem 0; }
+
+/* ─── Global Keyframes ───────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(36px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideLeft {
+  from { opacity: 0; transform: translateX(52px); }
+  to   { opacity: 1; transform: translateX(0);    }
+}
+
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(-52px); }
+  to   { opacity: 1; transform: translateX(0);     }
+}
+
+@keyframes lineGrow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+@keyframes lineGrowWidth {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+@keyframes kenBurns {
+  from { transform: scale(1);    }
+  to   { transform: scale(1.08); }
+}
+
+@keyframes bouncePulse {
+  0%, 100% { transform: translateY(0);   opacity: 0.5; }
+  50%       { transform: translateY(9px); opacity: 1;   }
+}
+
+@keyframes rotateSpin {
+  from { transform: rotate(0deg);   }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes marqueeLeft {
+  from { transform: translateX(0);    }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1);    }
+}
+
+@keyframes borderGrow {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+/* ─── Utility animation classes ──────────────────────────────────── */
+.anim-fadeUp    { animation: fadeUp    0.80s cubic-bezier(0.22,1,0.36,1) both; }
+.anim-fadeIn    { animation: fadeIn    0.80s ease both; }
+.anim-slideLeft { animation: slideLeft 0.80s cubic-bezier(0.22,1,0.36,1) both; }
+.anim-slideRight{ animation: slideRight 0.80s cubic-bezier(0.22,1,0.36,1) both; }
+.anim-scaleIn   { animation: scaleIn  0.70s cubic-bezier(0.22,1,0.36,1) both; }
+
+.delay-1 { animation-delay: 0.12s; }
+.delay-2 { animation-delay: 0.24s; }
+.delay-3 { animation-delay: 0.36s; }
+.delay-4 { animation-delay: 0.52s; }
+.delay-5 { animation-delay: 0.68s; }
+.delay-6 { animation-delay: 0.84s; }
+
+/* ─── Section Label ──────────────────────────────────────────────── */
+.section-label {
   display: flex;
   align-items: center;
-  margin-top: 30px;
-  height: 40px;
-  background-color: var(--brandColor);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+/* Dot */
+.section-label::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--navy);
+  flex-shrink: 0;
+}
+
+/* Line drawn after the dot via the span's own ::before */
+.section-label span {
+  font-family: "Roboto", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-label span::before {
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 1.5px;
+  background: var(--navy);
+  opacity: 0.35;
+  flex-shrink: 0;
+}
+
+/* ─── Divider line ───────────────────────────────────────────────── */
+.line-divider {
+  width: 60px;
+  height: 2px;
+  background: var(--navy);
+  margin: 20px 0;
+}
+
+.line-divider.centered { margin: 20px auto; }
+
+/* ─── Primary Button ─────────────────────────────────────────────── */
+.CommonBtnStyle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 30px;
+  border: none;
+  border-radius: 40px;
+  background: var(--navy);
   color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.30s ease, transform 0.30s ease, box-shadow 0.30s ease;
+  margin-top: 28px;
+  white-space: nowrap;
 }
 
-.CommonBtnStyle svg:first-child {
-  transform: translateX(-50px) rotate(-45deg);
-  /* Correct syntax: space, not comma */
-  transition: transform 0.5s ease, font-size 0.5s ease, background-color 0.5s ease, padding 0.5s ease;
-  font-size: 0px;
-  background-color: transparent;
-  border-radius: 50%;
-  padding: 5px;
+/* Shine sweep on hover */
+.CommonBtnStyle::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.22) 50%, transparent 70%);
+  transform: skewX(-20deg);
+  transition: left 0.55s ease;
+  pointer-events: none;
 }
 
-.CommonBtnStyle:hover svg:last-child {
-  transform: translateX(50px) rotate(-45deg);
-  /* Correct syntax: space, not comma */
-  transition: transform 0.5s ease, font-size 0.5s ease, background-color 0.5s ease, padding 0.5s ease;
-  font-size: 0px;
-  background-color: transparent;
-  border-radius: 50%;
-  padding: 5px;
+.CommonBtnStyle:hover::after { left: 130%; }
+
+.CommonBtnStyle:hover {
+  background: var(--navyDark);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(27, 45, 126, 0.38);
 }
 
-.CommonBtnStyle:hover svg:first-child {
-  transform: translateX(0px) rotate(-45deg);
-  /* Correct syntax: space, not comma */
-  transition: transform 0.5s ease, font-size 0.5s ease, background-color 0.5s ease, padding 0.5s ease;
-  font-size: 15px;
-  background-color: white;
-  border-radius: 50%;
-  padding: 5px;
-  color: black;
-}
+/* Hide the first arrow icon; animate the second one */
+.CommonBtnStyle svg:first-child { display: none; }
 
 .CommonBtnStyle svg:last-child {
-  transform: translateX(0px) rotate(-45deg);
-  /* Correct syntax: space, not comma */
-  transition: transform 0.5s ease, font-size 0.5s ease, background-color 0.5s ease, padding 0.5s ease;
-  font-size: 15px;
-  background-color: white;
-  border-radius: 50%;
-  padding: 5px;
-  color: black;
+  font-size: 14px;
+  transition: transform 0.30s ease;
 }
 
+.CommonBtnStyle:hover svg:last-child { transform: translateX(5px); }
 
-@media(min-width:1500px) and (max-width:4000px) {
-  .ContainerDefault {
-    margin: 0px 150px;
-    max-width: 100%;
-  }
+/* ─── Ghost / Outline Button ─────────────────────────────────────── */
+.GhostBtnStyle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 28px;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  border-radius: 40px;
+  background: transparent;
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+  margin-top: 28px;
 }
 
-@media (max-width:900px) {
+.GhostBtnStyle:hover {
+  border-color: white;
+  background: rgba(255, 255, 255, 0.10);
+  transform: translateY(-2px);
+}
 
-  .ContainerDefault {
-    margin: 0px 10px;
-    max-width: 100%;
-  }
+/* ─── Responsive ─────────────────────────────────────────────────── */
+@media (min-width: 1500px) {
+  .ContainerDefault { margin: 0 150px; }
+}
+
+@media (max-width: 900px) {
+  .ContainerDefault { margin: 0 16px; }
+  p { font-size: 16px; }
 }

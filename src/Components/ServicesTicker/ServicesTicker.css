@@ -1,0 +1,49 @@
+/* ─── Services Ticker ────────────────────────────────────────────── */
+#ServicesTickerContainer {
+  background: var(--navy);
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: marqueeLeft 36s linear infinite;
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 28px;
+  padding: 15px 40px 15px 0;
+  white-space: nowrap;
+}
+
+.ticker-item span {
+  font-family: "Roboto", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.50);
+  transition: color 0.25s ease;
+}
+
+.ticker-item:hover span {
+  color: rgba(255,255,255,0.85);
+}
+
+.ticker-sep {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.18);
+  flex-shrink: 0;
+}

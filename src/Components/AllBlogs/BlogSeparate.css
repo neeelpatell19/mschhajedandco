@@ -1,20 +1,139 @@
-#BlogSeparateContentContainer .AllBlogsMainContainer {
-    margin-top: 92px;
+/* ─── Individual Blog / Article Page ────────────────────────────── */
+#BlogSeparateContentContainer {
+  margin-top: var(--navHeight);
+  background: var(--white);
+  min-height: 100vh;
 }
 
-.BlogImageAndHeadingContainer>div {
-    max-height: 500px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
+/* ─── Breadcrumb ─────────────────────────────────────────────────── */
+.BlogBreadcrumb {
+  background: var(--surface);
+  padding: 14px 70px;
+  border-bottom: 1px solid var(--border);
 }
 
-.BlogImageAndHeadingContainer img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.BlogBreadcrumb nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  color: var(--textMuted);
 }
 
-.BlogImageAndHeadingContainer h2 {
-    text-align: center;
+.BlogBreadcrumb nav a {
+  color: var(--textMuted);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.BlogBreadcrumb nav a:hover { color: var(--navy); }
+.BlogBreadcrumb nav span { opacity: 0.40; }
+.BlogBreadcrumb nav strong { color: var(--navy); font-weight: 600; }
+
+/* ─── Article Layout ─────────────────────────────────────────────── */
+.BlogArticleWrapper {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 64px 0 100px;
+}
+
+/* ─── Article header ─────────────────────────────────────────────── */
+.BlogArticleHeader {
+  margin-bottom: 48px;
+}
+
+.BlogArticleTagPill {
+  display: inline-block;
+  background: var(--navyLight);
+  color: var(--navy);
+  font-family: "Roboto", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 40px;
+  margin-bottom: 20px;
+}
+
+.BlogArticleHeader h1 {
+  font-size: clamp(26px, 3vw, 40px);
+  font-weight: 400;
+  color: var(--navy);
+  margin: 0 0 20px;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+}
+
+.BlogArticleMeta {
+  display: flex;
+  gap: 24px;
+  font-family: "Roboto", sans-serif;
+  font-size: 13px;
+  color: var(--textMuted);
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ─── Hero image ─────────────────────────────────────────────────── */
+.BlogArticleImage {
+  margin-bottom: 40px;
+}
+
+.BlogArticleImage img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: var(--shadowMd);
+  display: block;
+}
+
+/* ─── Body typography ────────────────────────────────────────────── */
+.BlogArticleBody p {
+  font-size: 16px;
+  line-height: 1.82;
+  color: var(--textMuted);
+  margin-bottom: 20px;
+}
+
+.BlogArticleBody p strong,
+.BlogArticleBody p b {
+  color: var(--navy);
+  font-weight: 600;
+}
+
+.BlogArticleBody h2,
+.BlogArticleBody h3 {
+  font-weight: 400;
+  color: var(--text);
+  margin: 32px 0 12px;
+  line-height: 1.25;
+}
+
+.BlogArticleBody h2 { font-size: clamp(20px, 2.2vw, 28px); }
+.BlogArticleBody h3 { font-size: 18px; }
+
+.BlogArticleBody ul {
+  padding-left: 20px;
+  margin-bottom: 24px;
+}
+
+.BlogArticleBody ul li {
+  font-size: 15px;
+  line-height: 1.78;
+  color: var(--textMuted);
+  margin-bottom: 6px;
+}
+
+.BlogArticleBody ul li::marker { color: var(--navy); }
+
+/* ─── Responsive ─────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .BlogBreadcrumb { padding: 12px 16px; }
+
+  .BlogArticleWrapper { padding: 36px 0 70px; }
+
+  .BlogArticleImage img { height: 220px; }
 }

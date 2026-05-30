@@ -1,262 +1,377 @@
+/* ─── About Us Page ──────────────────────────────────────────────── */
+.AboutUsContainer {
+  margin-top: 0;
+}
+
+/* ─── Page Header ────────────────────────────────────────────────── */
 .AboutUsComponentMainContainer {
-    padding-top: 80px;
+  padding-top: 0;
 }
 
 .AboutUsMainHeaderContainer {
-    display: flex;
-    justify-content: center;
+  background: var(--navy);
+  padding: calc(var(--navHeight) + 60px) 70px 80px;
+  position: relative;
+  overflow: hidden;
 }
 
-
-.AboutUsMainHeaderContainer>div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-bottom: 80px;
+/* Subtle grid pattern background */
+.AboutUsMainHeaderContainer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
 }
 
-.AboutUsMainHeaderContainer>div p {
-    text-align: center;
-    max-width: 650px;
+.AboutUsMainHeaderContainer > div {
+  position: relative;
+  z-index: 1;
+  max-width: 780px;
 }
 
-.AboutUsContainer {
-    margin-top: 92px;
+.AboutUsMainHeaderContainer .section-label {
+  margin-bottom: 20px;
+}
+
+.AboutUsMainHeaderContainer .section-label::before {
+  background: rgba(255,255,255,0.50);
+}
+
+.AboutUsMainHeaderContainer .section-label span {
+  color: rgba(255,255,255,0.55);
+}
+
+.AboutUsMainHeaderContainer .section-label span::before {
+  background: rgba(255,255,255,0.30);
+  opacity: 1;
 }
 
 .AboutUsMainHeaderContainer h1 {
-    letter-spacing: -2px;
-    margin-top: 0;
-    margin-bottom: 0;
-    font-size: 68px;
-    text-align: center;
-    font-weight: 400;
-    line-height: 1.11em;
-    max-width: 767px;
-    color: #383c5b;
-    /* text-transform: uppercase; */
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 400;
+  color: white;
+  margin: 0 0 20px;
+  line-height: 1.10;
+  letter-spacing: -0.02em;
+}
+
+.AboutUsMainHeaderContainer > div p {
+  font-size: 17px;
+  line-height: 1.70;
+  color: rgba(255,255,255,0.55);
+  max-width: 580px;
+}
+
+/* ─── Banner Image ───────────────────────────────────────────────── */
+.TopAnimatedCommonBannerAllPages {
+  height: 500px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.TopAnimatedCommonBannerAllPages > div {
+  height: 100%;
+  width: 100%;
 }
 
 .TopAnimatedCommonBannerAllPages img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.2s ease-out;
 }
 
-.TopAnimatedCommonBannerAllPages {
-    height: 600px;
-    width: 100%;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-
-
-}
-
-.TopAnimatedCommonBannerAllPages>div {
-    height: 100%;
-    width: 100%;
-}
-
-.CounterCardContainer {
-    background-color: white;
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    transition: .5s;
-}
-
-.CounterCardContainer:hover {
-    background-color: white;
-    border: 1px solid rgba(0, 0, 0, 0.463);
-    transition: .5s;
-    transform: scale(1.02);
-    border-radius: 8px;
-}
-
-
-.CounterCardContainer {
-    margin: 10px;
-    padding: 20px;
-}
-
+/* ─── Counter Strip ──────────────────────────────────────────────── */
 .CompanyAnimatedNumbersContainer {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
+  background: var(--navy);
+  padding: 0;
 }
 
 .CompanyAnimatedNumbersContainer .ant-row {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  width: 100%;
 }
 
-.CounterCard h2 {
-    font-size: 40px;
-    text-align: center;
-    margin-top: 0px;
-    margin-bottom: 20px;
+.CounterCardContainer {
+  flex: 1;
+  padding: 48px 40px;
+  border-right: 1px solid rgba(255,255,255,0.10);
+  transition: background 0.3s ease;
 }
 
-.CounterCard p {
-    text-align: center;
+.CounterCardContainer:last-child {
+  border-right: none;
+}
+
+.CounterCardContainer:hover {
+  background: rgba(255,255,255,0.05);
+  transform: none;
+  border-radius: 0;
+}
+
+.CounterCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .CounterCard span {
-    width: 100%;
-    display: flex;
-    justify-content: end;
+  display: block;
+  margin-bottom: 12px;
 }
 
 .CounterCard span svg {
-    font-size: 40px;
-    color: #383c5b;
-    fill: #383c5b;
+  font-size: 32px;
+  color: rgba(255,255,255,0.30);
+  fill: rgba(255,255,255,0.30);
 }
 
-.AboutImageContainer img {
-    opacity: 0.2;
-    width: 100%;
+.CounterCard h2 {
+  font-size: 52px;
+  color: white;
+  margin: 0 0 8px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.CounterCard p {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+}
+
+/* ─── About Info Section ─────────────────────────────────────────── */
+.AboutUsInfoContainer {
+  background: var(--surface);
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
 }
 
 .AboutImageContainer {
-    position: absolute;
-    left: 0px;
-    right: 0px;
-    overflow: hidden;
-
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
 }
 
-.AboutUsInfoContainer {
-    width: 100%;
-    padding-top: 80px;
-    position: relative;
-    overflow: hidden;
+.AboutImageContainer img {
+  width: 100%;
+  opacity: 0.04;
 }
 
 .AboutContentContainerText {
-    position: sticky;
-    padding-top: 80px;
-    padding-bottom: 120px;
+  position: relative;
+  z-index: 1;
 }
 
 .AboutContentContainerText h2 {
-    font-size: var(--secondSectionHeading);
+  font-size: clamp(24px, 2.5vw, 34px);
+  font-weight: 400;
+  color: var(--navy);
+  margin-bottom: 24px;
 }
 
-.TeamMemberCardContainer {
-    margin: 10px;
-    /* position: relative; */
-    /* display: flex; */
-    /* height: 400px;
-    overflow: hidden; */
-    transition: .5s;
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    cursor: pointer;
+.AboutContentContainerText p {
+  font-size: 16px;
+  line-height: 1.80;
+  color: var(--textMuted);
+  margin-bottom: 16px;
 }
 
-.TeamMemberCardContainer:hover {
-    transform: scale(1.02);
-    transition: .5s;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-}
-
-.TeamMemberCardContainer>div img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: .5s;
-}
-
-.TeamMemberCardContainer .hoverOverlayBlackContainer {
-    position: absolute;
-    /* top: 0px;
-    left: 0px; */
-    width: 20%;
-    height: 20%;
-    background-color: transparent;
-    transition: .5s;
-}
-
-.TeamMemberCardContainer:hover .hoverOverlayBlackContainer {
-    background-color: rgba(0, 0, 0, 0.399);
-    width: 100%;
-    height: 100%;
-    transition: .5s;
-}
-
-
-.TeamMemberCardContainer>div:first-child {
-    display: flex;
-    /* align-items: end; */
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    /* height: 400px; */
-    overflow: hidden;
-    position: relative;
-}
-
-.TeamMemberCardContainer>div:last-child {
-    /* width: 100%; */
-    background-color: rgb(240, 240, 240);
-    padding: 20px 20px;
-}
-
-.TeamMemberCardContainer>div h3 {
-    margin-bottom: 7px;
-    margin-top: 0px;
-    /* transform: translate(8%) rotate(-90deg);; */
-    /* margin: 0px; */
-
+/* ─── Team Section ───────────────────────────────────────────────── */
+.TeamPeoplesContaner {
+  background: var(--white);
+  padding: 100px 0;
 }
 
 .TeamPeoplesContaner h2 {
-    font-size: 45px;
-    font-weight: 600;
-    margin-top: 0px;
-    /* color: #071D96; */
-    text-align: center;
+  font-size: clamp(28px, 3vw, 44px);
+  font-weight: 400;
+  color: var(--text);
+  margin: 0 0 52px;
+  letter-spacing: -0.02em;
 }
 
+.TeamMembersDataContainer .ant-row { }
+
+/* ─── Team Member Card ───────────────────────────────────────────── */
+.TeamMemberCardContainer {
+  margin: 10px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: transform 0.40s cubic-bezier(0.22,1,0.36,1), box-shadow 0.40s ease;
+}
+
+.TeamMemberCardContainer:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadowLg);
+}
+
+/* Image area */
+.TeamMemberCardContainer > div:first-child {
+  position: relative;
+  overflow: hidden;
+  height: 320px;
+}
+
+.TeamMemberCardContainer > div:first-child img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.60s cubic-bezier(0.22,1,0.36,1);
+}
+
+.TeamMemberCardContainer:hover > div:first-child img {
+  transform: scale(1.05);
+}
+
+/* Hover overlay */
+.hoverOverlayBlackContainer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(11,13,30,0.75) 0%,
+    transparent 55%
+  );
+  opacity: 0;
+  transition: opacity 0.40s ease;
+  z-index: 1;
+}
+
+.TeamMemberCardContainer:hover .hoverOverlayBlackContainer {
+  opacity: 1;
+}
+
+/* Name + position label — slides up */
+.TeamMemberCardSlideInfo {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  padding: 20px 20px 16px;
+  transform: translateY(100%);
+  transition: transform 0.40s cubic-bezier(0.22,1,0.36,1);
+}
+
+.TeamMemberCardContainer:hover .TeamMemberCardSlideInfo {
+  transform: translateY(0);
+}
+
+.TeamMemberCardSlideInfo h3 {
+  color: white;
+  font-size: 17px;
+  font-weight: 400;
+  margin: 0 0 4px;
+}
+
+.TeamMemberCardSlideInfo span {
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  color: rgba(255,255,255,0.60);
+  font-weight: 500;
+}
+
+/* Static name below the card */
+.TeamMemberCardContainer > div:last-child {
+  background: var(--surface);
+  padding: 18px 20px;
+  border-top: 1px solid var(--border);
+}
+
+.TeamMemberCardContainer > div:last-child h3 {
+  margin: 0 0 4px;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text);
+}
+
+.TeamMemberCardContainer > div:last-child span {
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  color: var(--textMuted);
+}
+
+/* ─── Modal ──────────────────────────────────────────────────────── */
 .ant-modal-mask {
-    backdrop-filter: blur(6px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background: rgba(11,13,30,0.65) !important;
+}
+
+.ant-modal-content {
+  border-radius: var(--radiusLg) !important;
+  overflow: hidden;
 }
 
 .ModalInsideInfo {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-    padding: 0px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  padding: 20px 16px;
+}
+
+.ModalInsideInfo h1 {
+  font-size: 24px;
+  color: var(--navy);
+  margin-bottom: 4px;
 }
 
 .ModalInsideInfo p {
-    margin-top: 7px;
+  margin-top: 4px;
+  font-size: 14px;
+  color: var(--textMuted);
+  line-height: 1.6;
 }
 
+/* ─── Responsive ─────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .AboutUsMainHeaderContainer {
+    padding: calc(var(--navHeight) + 32px) 16px 60px;
+  }
 
-@media (max-width:900px){
-    .AboutUsContainer {
-        margin-top: 92px;
-        display: flex;
-    }
-    .AboutUsMainHeaderContainer h1 {
-        letter-spacing: -2px;
-        margin-top: 0;
-        margin-bottom: 0;
-        font-size: 40px;
-        text-align: center;
-        font-weight: 400;
-        line-height: 1.11em;
-        max-width: 767px;
-        color: #383c5b;
-        /* text-transform: uppercase; */
-    }
-    
-    .TeamPeoplesContaner h2 {
-        font-size: 40px;
-        font-weight: 600;
-        margin-top: 0px;
-        /* color: #071D96; */
-        text-align: center;
-    }
+  .AboutUsMainHeaderContainer h1 {
+    font-size: 36px;
+  }
+
+  .TopAnimatedCommonBannerAllPages {
+    height: 280px;
+  }
+
+  .CompanyAnimatedNumbersContainer .ant-row {
+    flex-direction: column;
+  }
+
+  .CounterCardContainer {
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.10);
+    padding: 36px 24px;
+  }
+
+  .TeamPeoplesContaner h2 {
+    font-size: 32px;
+    margin-bottom: 32px;
+  }
+
+  .TeamMemberCardContainer {
+    margin: 6px 0;
+  }
+
+  /* On mobile show the slide info always */
+  .TeamMemberCardSlideInfo { transform: translateY(0); }
+  .hoverOverlayBlackContainer { opacity: 1; }
 }

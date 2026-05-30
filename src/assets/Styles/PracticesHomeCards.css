@@ -1,119 +1,153 @@
-.PracticeCardStyleContainer {
-    max-width: 100%;
-    padding: 10px;
-    overflow: hidden;
+/* ─── Practices Section ──────────────────────────────────────────── */
+#PracticesHomeCardsContainer {
+  background: linear-gradient(180deg, var(--white) 0%, var(--surface) 55%, var(--white) 100%);
+  padding: 100px 0 120px;
 }
 
-.CardBodyContainer img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: .5s;
+/* ─── Section Header ─────────────────────────────────────────────── */
+.PracticesHomeMainContainer { padding-bottom: 0; }
+
+.PracticesHeaderRow {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 64px;
+  gap: 24px;
 }
 
-.CardBodyContainer {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+.PracticesHeaderRow .practices-label {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.PracticesHeaderRow .practices-label .section-label { margin-bottom: 0; }
+
+.PracticesHeaderRow h1 {
+  font-size: clamp(32px, 3.5vw, 52px);
+  font-weight: 400;
+  color: var(--text);
+  margin: 0;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.PracticesHeaderRow .practice-count {
+  font-family: "Roboto", sans-serif;
+  font-size: 13px;
+  color: var(--textMuted);
+  white-space: nowrap;
+  align-self: flex-end;
+  padding-bottom: 6px;
+}
+
+/* ─── Practice List ──────────────────────────────────────────────── */
+.PracticesList {
+  border-top: 1px solid var(--border);
+}
+
+/* ─── Practice Row ───────────────────────────────────────────────── */
+.PracticeRow {
+  display: grid;
+  grid-template-columns: 72px 1fr auto;
+  align-items: center;
+  gap: 32px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  transition: background 0.30s ease, padding-left 0.30s ease;
+  cursor: pointer;
+}
+
+/* Left navy accent bar */
+.PracticeRow::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--navy);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.35s cubic-bezier(0.22,1,0.36,1);
+}
+
+.PracticeRow:hover::before { transform: scaleY(1); }
+
+.PracticeRow:hover {
+  background: var(--surface);
+  padding-left: 20px;
+}
+
+/* Number */
+.PracticeRowNum {
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--textMuted);
+  transition: color 0.25s ease;
+  white-space: nowrap;
+}
+
+.PracticeRow:hover .PracticeRowNum { color: var(--navy); }
+
+/* Title + description */
+.PracticeRowContent { min-width: 0; }
+
+.PracticeRowTitle {
+  font-family: "Prata", serif;
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 400;
+  color: var(--text);
+  margin: 0 0 4px;
+  line-height: 1.2;
+  transition: color 0.25s ease;
+}
+
+.PracticeRow:hover .PracticeRowTitle { color: var(--navy); }
+
+.PracticeRowDesc {
+  font-family: "Roboto", sans-serif;
+  font-size: 13px;
+  color: var(--textMuted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Arrow */
+.PracticeRowArrow {
+  font-size: 20px;
+  color: var(--border);
+  transition: color 0.30s ease, transform 0.30s cubic-bezier(0.22,1,0.36,1);
+  flex-shrink: 0;
+}
+
+.PracticeRow:hover .PracticeRowArrow {
+  color: var(--navy);
+  transform: translateX(6px);
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  #PracticesHomeCardsContainer { padding: 80px 0 90px; }
+
+  .PracticesHeaderRow {
     flex-direction: column;
-    border-radius: 20px;
-}
+    align-items: flex-start;
+    margin-bottom: 36px;
+  }
 
-.CardBodyContainer::before {
-    content: "";
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.241);
-    position: absolute;
-    opacity: 1;
-    transition: .5s;
-}
+  .PracticeRow {
+    grid-template-columns: 52px 1fr auto;
+    gap: 16px;
+    padding: 22px 0;
+  }
 
-.PracticeCardStyleContainer:hover .CardBodyContainer::before {
-    content: "";
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.714);
-    /* position: absolute; */
-    opacity: 1;
-    transition: .5s;
-}
+  .PracticeRow:hover { padding-left: 14px; }
 
-
-
-.CardImageHomeContainer {
-    height: 350px;
-    width: 100%;
-    overflow: hidden;
-}
-
-.CardContentContainer {
-    position: absolute;
-    bottom: 0px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    max-width: 100%;
-    right: 0px;
-    left: 0px;
-    padding: 15px 20px;
-    backdrop-filter: blur(1px);
-    /* transform: translatey(60px); */
-}
-
-.PracticeCardStyleContainer:hover .CardContentContainer{
-    backdrop-filter: blur(10px);
-}
-.CardContentContainer h4 {
-    color: var(--WhiteColor);
-    margin-bottom: 10px;
-    font-size: 20px;
-    font-weight: 400;
-    text-align: start;
-    width: 100%;
-    /* text-align: center; */
-    margin-top: 0px;
-
-}
-
-.CardContentContainer p {
-    /* text-align: center; */
-    margin-top: 0px;
-    color: var(--WhiteColor);
-    font-size: 15px;
-    width: 100%;
-
-}
-
-.PracticeCardStyleContainer .AnimatedBtnContainer {
-    width: 100%;
-}
-
-.PracticeCardStyleContainer .AnimatedBtnContainer button {
-    padding: 8px 15px !important;
-    font-size: 10px;
-    height: 35px;
-    background-color: #931e9554 !important;
-}
-.PracticesHomeMainContainer{
-    padding-bottom: 120px;
-}
-.PracticesHomeMainContainer h1{
-    font-size: 40px;
-    font-weight: 600;
-    margin-top: 0px;
-    /* color: #071D96; */
-    text-align: center;
-}
-
-@media (max-width:900px){
-    .PracticeCardStyleContainer {
-        max-width: 100%;
-        padding: 10px 0px;
-        overflow: hidden;
-    }
-    
+  .PracticeRowTitle { font-size: 17px; }
 }

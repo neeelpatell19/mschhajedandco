@@ -44,7 +44,7 @@ const Navigationlinks = [
             },
             {
                 link: "COMMERCIAL AND LEGAL ASSISTANCE",
-                path: "Commertial-and-legal-assistance"
+                path: "commercial-and-legal-assistance"
             }
         ],
         path: ""
