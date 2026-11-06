@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import "../../assets/Styles/Sectors.css";
 import { motion } from "framer-motion";
@@ -63,7 +65,7 @@ const Sectors = () => {
                 <div className="sectors-track">
                     {items.map((item, index) => (
                         <div className="sector-item" key={index}>
-                            <img src={item.icon} alt={item.label} />
+                            <img src={item.icon.src} alt={item.label} />
                             <p>{item.label}</p>
                         </div>
                     ))}

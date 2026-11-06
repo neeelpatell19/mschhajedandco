@@ -50,14 +50,14 @@
 }
 
 .WhyUsAccentNum {
-  font-family: "Prata", serif;
+  font-family: var(--font-prata), "Prata", serif;
   font-size: 32px;
   color: var(--navy);
   line-height: 1;
 }
 
 .WhyUsAccentLabel {
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-roboto), "Roboto", sans-serif;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -129,7 +129,7 @@
 
 /* ─── Number (top-right) ─────────────────────────────────────────── */
 .WhyUsCardNum {
-  font-family: "Prata", serif;
+  font-family: var(--font-prata), "Prata", serif;
   font-size: 28px;
   font-weight: 400;
   color: rgba(27, 45, 126, 0.10);
@@ -237,7 +237,7 @@
 }
 
 .PrimeGlobalLabel {
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-roboto), "Roboto", sans-serif;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.22em;
@@ -286,7 +286,7 @@
 }
 
 .PGStatNum {
-  font-family: "Prata", serif;
+  font-family: var(--font-prata), "Prata", serif;
   font-size: 28px;
   font-weight: 400;
   color: white;
@@ -295,7 +295,7 @@
 }
 
 .PGStatLabel {
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-roboto), "Roboto", sans-serif;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.16em;

@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { Button } from 'antd'; // Optional: If you're using Ant Design for styling
-import { ArrowUpOutlined } from '@ant-design/icons'; // Optional: If you're using Ant Design for the icon
-import "./ScrollToTop.css"
+"use client";
+
+import { useState, useEffect } from "react";
+import { ArrowUp } from "lucide-react";
+import "./ScrollToTop.css";
+
 const ScrollToTopButton = () => {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
-        // Function to show or hide the button based on scroll position
+        // Show or hide the button based on scroll position
         const handleScroll = () => {
             if (window.scrollY > 300) { // Show button after scrolling 300px
                 setIsVisible(true);
@@ -33,13 +35,14 @@ const ScrollToTopButton = () => {
 
     return (
         isVisible && (
-            <Button
-                type="primary"
-                shape="circle"
-                icon={<ArrowUpOutlined />}
+            <button
+                type="button"
+                aria-label="Scroll to top"
                 className="scroll-to-top-btn"
                 onClick={scrollToTop}
-            />
+            >
+                <ArrowUp size="1em" strokeWidth={1.75} />
+            </button>
         )
     );
 };

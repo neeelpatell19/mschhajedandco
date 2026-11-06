@@ -1,11 +1,8 @@
-import React from "react";
 import "../../assets/Styles/Footer.css";
-import { Row, Col, Input } from "antd";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { Facebook, Linkedin, Youtube, Instagram } from "@/Components/ui/BrandIcons";
 import Navigationlinks from "../NavigationBar/NavigationLinksData";
-import { Link } from "react-router-dom";
-import { FaFacebook, FaLinkedin, FaYoutube } from "react-icons/fa";
-import { AiFillInstagram } from "react-icons/ai";
-import { HiArrowRight } from "react-icons/hi";
 
 const Footer = () => {
     return (
@@ -18,8 +15,8 @@ const Footer = () => {
                         <h2>Ready to Work With Us?</h2>
                         <p>Speak with our team about your tax, audit or advisory needs.</p>
                     </div>
-                    <Link to="/contact-us" className="FooterCtaBtn">
-                        Get in Touch <HiArrowRight />
+                    <Link href="/contact-us" className="FooterCtaBtn">
+                        Get in Touch <ArrowRight size="1em" />
                     </Link>
                 </div>
             </div>
@@ -27,10 +24,10 @@ const Footer = () => {
 
         <section id="FooterContainer">
             <div className="ContainerDefault">
-                <Row gutter={[40, 48]}>
+                <div className="flex flex-wrap -mx-5 gap-y-12">
 
                     {/* ── Brand + Newsletter column ── */}
-                    <Col lg={10} md={24} xs={24}>
+                    <div className="w-full shrink-0 px-5 lg:w-5/12">
                         <div className="FooterBrandCol">
                             <div className="FooterLogo">
                                 <img
@@ -45,14 +42,19 @@ const Footer = () => {
 
                             <p className="FooterNewsletterLabel">Newsletter</p>
                             <div className="FooterNewsletterForm">
-                                <Input placeholder="Enter your email address" />
+                                <input
+                                    type="email"
+                                    className="FooterNewsletterInput"
+                                    placeholder="Enter your email address"
+                                    aria-label="Email address"
+                                />
                                 <button className="FooterNewsletterSubmit">Subscribe</button>
                             </div>
                         </div>
-                    </Col>
+                    </div>
 
                     {/* ── Contact column ── */}
-                    <Col lg={5} md={12} xs={24}>
+                    <div className="w-full shrink-0 px-5 md:w-1/2 lg:w-[calc(5/24*100%)]">
                         <div className="FooterContactCol">
                             <p className="FooterColHeading">Contact</p>
                             <ul>
@@ -70,44 +72,44 @@ const Footer = () => {
                                 </li>
                             </ul>
                         </div>
-                    </Col>
+                    </div>
 
                     {/* ── Navigation links ── */}
-                    <Col lg={4} md={12} xs={24}>
+                    <div className="w-full shrink-0 px-5 md:w-1/2 lg:w-1/6">
                         <div className="CompanyContainer">
                             <p className="FooterColHeading">Company</p>
                             <ul>
                                 {Navigationlinks.map((item, index) => (
                                     <li key={index}>
-                                        <Link to={item.path || "#"}>{item.link}</Link>
+                                        <Link href={item.path || "#"}>{item.link}</Link>
                                     </li>
                                 ))}
                             </ul>
                         </div>
-                    </Col>
+                    </div>
 
                     {/* ── Socials ── */}
-                    <Col lg={5} md={12} xs={24}>
+                    <div className="w-full shrink-0 px-5 md:w-1/2 lg:w-[calc(5/24*100%)]">
                         <div className="SocialContainer">
                             <p className="FooterColHeading">Follow Us</p>
                             <ul>
                                 <li className="social-facebook">
-                                    <FaFacebook /> Facebook
+                                    <Facebook size="1em" /> Facebook
                                 </li>
                                 <li className="social-linkedin">
-                                    <FaLinkedin /> LinkedIn
+                                    <Linkedin size="1em" /> LinkedIn
                                 </li>
                                 <li className="social-youtube">
-                                    <FaYoutube /> YouTube
+                                    <Youtube size="1em" /> YouTube
                                 </li>
                                 <li className="social-instagram">
-                                    <AiFillInstagram /> Instagram
+                                    <Instagram size="1em" /> Instagram
                                 </li>
                             </ul>
                         </div>
-                    </Col>
+                    </div>
 
-                </Row>
+                </div>
             </div>
 
             {/* Copyright bar */}
@@ -115,9 +117,9 @@ const Footer = () => {
                 <p>© 2025 M.S. Chhajed &amp; Co. All rights reserved.</p>
                 <p>
                     Built by&nbsp;
-                    <Link to="https://www.outleadsolutions.com/" target="_blank">
+                    <a href="https://www.outleadsolutions.com/" target="_blank" rel="noopener noreferrer">
                         OutLead Solutions
-                    </Link>
+                    </a>
                 </p>
             </div>
         </section>

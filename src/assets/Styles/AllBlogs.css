@@ -54,24 +54,73 @@
   padding: 72px 0 100px;
 }
 
-.AllBlogsBody .ant-tabs-nav::before { border-bottom: 1px solid var(--border); }
+/* Tabs (BlogTabs.jsx). The cards below were designed against this
+   line-height, so it is set on the tabs wrapper and inherited. */
+.BlogTabs {
+  line-height: 1.5714285714285714;
+}
 
-.AllBlogsBody .ant-tabs-tab-btn {
-  font-family: "Roboto", sans-serif;
+.BlogTabsNav {
+  position: relative;
+  margin: 0 0 16px;
+}
+
+.BlogTabsNav::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.BlogTabsList {
+  position: relative;
+  display: flex;
+}
+
+.BlogTab {
+  display: inline-flex;
+  align-items: center;
+  margin: 0;
+  padding: 12px 0;
+  border: 0;
+  background: transparent;
+  font-family: var(--font-roboto), "Roboto", sans-serif;
   font-size: 13px;
   font-weight: 600;
+  line-height: 1.5714285714285714;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--textMuted) !important;
+  white-space: nowrap;
+  color: var(--textMuted);
+  cursor: pointer;
   transition: color 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.AllBlogsBody .ant-tabs-tab-active .ant-tabs-tab-btn {
-  color: var(--navy) !important;
+.BlogTab + .BlogTab { margin-left: 32px; }
+
+.BlogTab[aria-selected="true"] {
+  color: var(--navy);
 }
 
-.AllBlogsBody .ant-tabs-ink-bar {
-  background: var(--navy) !important;
+.BlogTab:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 2px;
+}
+
+.BlogTabsInkBar {
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  background: var(--navy);
+  pointer-events: none;
+  transition: left 0.3s, width 0.3s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .BlogTabsInkBar { transition: none; }
 }
 
 /* ─── Blog Card ──────────────────────────────────────────────────── */
@@ -122,7 +171,7 @@
   background: var(--navyLight);
   color: var(--navy);
   border: 1px solid rgba(27,45,126,0.18);
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-roboto), "Roboto", sans-serif;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -153,7 +202,7 @@
   padding-top: 14px;
   margin-top: auto;
   border-top: 1px solid var(--border);
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-roboto), "Roboto", sans-serif;
   font-size: 12px;
   color: var(--textMuted);
 }

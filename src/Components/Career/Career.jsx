@@ -1,10 +1,8 @@
-import React from "react";
+"use client";
+
 import "./Career.css";
 import CareerJobData from "./CareerJobData";
-import { Row, Col } from "antd";
-import { BsSuitcaseLgFill } from "react-icons/bs";
-import { IoLocationSharp } from "react-icons/io5";
-import { HiArrowRight } from "react-icons/hi";
+import { ArrowRight, BriefcaseBusiness, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
 
 const Careers = () => {
@@ -34,8 +32,8 @@ const Careers = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: [0.22,1,0.36,1], delay: 0.36 }}
                     >
-                        Build a meaningful career in accounting and law. We're looking for sharp,
-                        motivated professionals to grow with a firm that's trusted by clients across Gujarat.
+                        Build a meaningful career in accounting and law. We&apos;re looking for sharp,
+                        motivated professionals to grow with a firm that&apos;s trusted by clients across Gujarat.
                     </motion.p>
                 </div>
             </div>
@@ -43,9 +41,9 @@ const Careers = () => {
             {/* ── Job listings ── */}
             <div className="ContainerDefault">
                 <div className="CareersJobsContentContainer">
-                    <Row style={{ width: "100%" }}>
+                    <div className="flex w-full flex-wrap">
                         {CareerJobData.map((item, index) => (
-                            <Col key={index} lg={8} md={12} xs={24} style={{ width: "100%" }}>
+                            <div key={index} className="w-full flex-none md:w-1/2 lg:w-1/3">
                                 <motion.div
                                     className="CareersCardsContainer"
                                     initial={{ opacity: 0, y: 24 }}
@@ -55,19 +53,19 @@ const Careers = () => {
                                 >
                                     <h4>{item.jobTitle}</h4>
                                     <div className="TagStyle">
-                                        <p><BsSuitcaseLgFill />{item.jobType}</p>
-                                        <p><IoLocationSharp />{item.jobLocation}</p>
+                                        <p><BriefcaseBusiness size="1em" />{item.jobType}</p>
+                                        <p><MapPin size="1em" />{item.jobLocation}</p>
                                     </div>
                                     <a
                                         className="CareerApplyBtn"
                                         href={`mailto:mahesh@mschhajedandco.com?subject=Application — ${item.jobTitle}`}
                                     >
-                                        Apply Now <HiArrowRight />
+                                        Apply Now <ArrowRight size="1em" />
                                     </a>
                                 </motion.div>
-                            </Col>
+                            </div>
                         ))}
-                    </Row>
+                    </div>
                 </div>
             </div>
 

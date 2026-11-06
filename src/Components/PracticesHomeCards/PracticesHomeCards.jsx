@@ -1,26 +1,27 @@
+"use client";
+
 import React from "react";
 import "../../assets/Styles/PracticesHomeCards.css";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { HiArrowRight } from "react-icons/hi";
 import {
-    TbWorld, TbRocket, TbShieldCheck, TbTrendingUp,
-    TbReceiptTax, TbFileInvoice, TbArrowsExchange,
-    TbDatabase, TbScale,
-} from "react-icons/tb";
+    ArrowRight, Globe, Rocket, ShieldCheck, TrendingUp,
+    ReceiptText, ReceiptIndianRupee, ArrowLeftRight,
+    Database, Scale,
+} from "lucide-react";
 
 const ease = [0.22, 1, 0.36, 1];
 
 const PracticeCardData = [
-    { icon: <TbWorld />,          cardTitle: "India Strategy — Doing Business in India", cardContent: "Advisory and entity set-up for companies entering India",          practiceName: "india-strategy-doing-business-india" },
-    { icon: <TbRocket />,         cardTitle: "Start-Up Services",                         cardContent: "Incorporation, compliance and advisory for new ventures",          practiceName: "start-up-services"                   },
-    { icon: <TbShieldCheck />,    cardTitle: "Assurances",                                cardContent: "Statutory audit, tax audit, internal audit and risk reviews",     practiceName: "assurances"                          },
-    { icon: <TbTrendingUp />,     cardTitle: "Transaction Advisory",                      cardContent: "Financial due diligence, valuation and M&A advisory",             practiceName: "transaction-advisory"                },
-    { icon: <TbReceiptTax />,     cardTitle: "Direct Taxes",                              cardContent: "Tax planning, structuring and litigation for corporates",          practiceName: "direct-taxes"                        },
-    { icon: <TbFileInvoice />,    cardTitle: "Goods and Service Tax",                     cardContent: "GST registration, advisory, compliance and representation",        practiceName: "goods-and-services-tax"              },
-    { icon: <TbArrowsExchange />, cardTitle: "Transfer Pricing",                          cardContent: "Benchmarking, documentation, APA and dispute resolution",         practiceName: "transfer-pricing"                    },
-    { icon: <TbDatabase />,       cardTitle: "Knowledge Process Outsourcing",             cardContent: "Scalable accounting, payroll and compliance outsourcing",          practiceName: "knowledge-process-outsourcing"       },
-    { icon: <TbScale />,          cardTitle: "Commercial and Legal Assistance",           cardContent: "Agreement drafting, governance and business structuring",          practiceName: "commercial-and-legal-assistance"     },
+    { icon: <Globe size="1em" />,          cardTitle: "India Strategy — Doing Business in India", cardContent: "Advisory and entity set-up for companies entering India",          practiceName: "india-strategy-doing-business-india" },
+    { icon: <Rocket size="1em" />,         cardTitle: "Start-Up Services",                         cardContent: "Incorporation, compliance and advisory for new ventures",          practiceName: "start-up-services"                   },
+    { icon: <ShieldCheck size="1em" />,    cardTitle: "Assurances",                                cardContent: "Statutory audit, tax audit, internal audit and risk reviews",     practiceName: "assurances"                          },
+    { icon: <TrendingUp size="1em" />,     cardTitle: "Transaction Advisory",                      cardContent: "Financial due diligence, valuation and M&A advisory",             practiceName: "transaction-advisory"                },
+    { icon: <ReceiptText size="1em" />,     cardTitle: "Direct Taxes",                              cardContent: "Tax planning, structuring and litigation for corporates",          practiceName: "direct-taxes"                        },
+    { icon: <ReceiptIndianRupee size="1em" />,    cardTitle: "Goods and Service Tax",                     cardContent: "GST registration, advisory, compliance and representation",        practiceName: "goods-and-services-tax"              },
+    { icon: <ArrowLeftRight size="1em" />, cardTitle: "Transfer Pricing",                          cardContent: "Benchmarking, documentation, APA and dispute resolution",         practiceName: "transfer-pricing"                    },
+    { icon: <Database size="1em" />,       cardTitle: "Knowledge Process Outsourcing",             cardContent: "Scalable accounting, payroll and compliance outsourcing",          practiceName: "knowledge-process-outsourcing"       },
+    { icon: <Scale size="1em" />,          cardTitle: "Commercial and Legal Assistance",           cardContent: "Agreement drafting, governance and business structuring",          practiceName: "commercial-and-legal-assistance"     },
 ];
 
 const PracticesHomeCards = () => (
@@ -52,7 +53,7 @@ const PracticesHomeCards = () => (
                         viewport={{ once: true, amount: 0.1 }}
                         transition={{ duration: 0.50, ease, delay: index * 0.05 }}
                     >
-                        <Link to={`/practices/${item.practiceName}`} className="PracticeRow">
+                        <Link href={`/practices/${item.practiceName}`} className="PracticeRow">
                             {/* Icon box */}
                             <div className="PracticeRowIconBox">
                                 {item.icon}
@@ -69,7 +70,7 @@ const PracticesHomeCards = () => (
                                 <span className="PracticeRowNum">
                                     {String(index + 1).padStart(2, "0")}
                                 </span>
-                                <HiArrowRight className="PracticeRowArrow" />
+                                <ArrowRight size="1em" className="PracticeRowArrow" />
                             </div>
                         </Link>
                     </motion.div>

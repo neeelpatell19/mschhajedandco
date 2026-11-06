@@ -1,7 +1,5 @@
-import React, { useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import Link from "next/link";
 import "./BlogSeparate.css";
-import BlogData from "../InSights/BlogData";
 
 const BlogsContent = {
     "relaxation-in-due-dates": {
@@ -40,7 +38,7 @@ const BlogsContent = {
         author: "Karan Patel",
         body: (
             <>
-                <p>Under the leadership of our Hon'ble Prime Minister, India is undertaking the largest renewable capacity expansion program in the world. The Ministry of New and Renewable Energy (MNRE) has taken several steps to achieve the clean energy goals of the current government by implementing various schemes, such as the Solar Park Scheme, Solar Rooftop Scheme, and Solar PV power plants on canal banks and canal tops.</p>
+                <p>Under the leadership of our Hon&apos;ble Prime Minister, India is undertaking the largest renewable capacity expansion program in the world. The Ministry of New and Renewable Energy (MNRE) has taken several steps to achieve the clean energy goals of the current government by implementing various schemes, such as the Solar Park Scheme, Solar Rooftop Scheme, and Solar PV power plants on canal banks and canal tops.</p>
                 <p>The solar industry had long been grappling with the uncertainty around GST classification of solar power generating systems. The dispute primarily centred around whether such systems should be treated as goods, services, or a works contract — each attracting a different rate of tax.</p>
                 <p>The recent clarification from the GST Council has brought much-needed relief to the solar sector, providing clarity on the applicable rates and the treatment of various components within a solar EPC contract.</p>
             </>
@@ -54,7 +52,7 @@ const BlogsContent = {
         author: "Karan Patel",
         body: (
             <>
-                <p>Vide the Finance Act, 2020, a new clause (1H) has been inserted into Section 206C of the Income Tax Act, 1961 ("the Act"), to expand the scope of Tax Collection at Source ("TCS") provisions. A seller of goods is now required to collect tax at source at the rate of 0.1% from a buyer of goods upon receipt of consideration for the sale of goods.</p>
+                <p>Vide the Finance Act, 2020, a new clause (1H) has been inserted into Section 206C of the Income Tax Act, 1961 (&quot;the Act&quot;), to expand the scope of Tax Collection at Source (&quot;TCS&quot;) provisions. A seller of goods is now required to collect tax at source at the rate of 0.1% from a buyer of goods upon receipt of consideration for the sale of goods.</p>
                 <p>Prior to this insertion, TCS provisions were applicable only to the sale of selected goods, namely alcoholic liquor for human consumption, scrap, tendu leaves, timber obtained from forests, and lease contracts for parking lots and toll plazas.</p>
                 <p>The new provision applies to every seller whose total sales, gross receipts, or turnover from the business carried on by him exceeds ₹10 crore during the financial year immediately preceding the year in which the sale of goods is carried out. Businesses above this threshold must now assess their compliance obligations under the expanded TCS framework.</p>
             </>
@@ -68,8 +66,8 @@ const BlogsContent = {
         author: "Karan Patel",
         body: (
             <>
-                <p>This guide has been prepared by M.S. Chhajed &amp; Co. with the intent of providing stakeholders with an overview of India's demographic profile, key sectors, insights into the regulatory framework, forms of business enterprises, and relevant tax regimes in a concise manner. The information presented in this guide has been validated up to 31st March 2020.</p>
-                <p>India offers a large and growing consumer market, a young and skilled workforce, and an improving regulatory environment. The government's "Ease of Doing Business" reforms have significantly reduced the time and cost involved in starting and operating a business in India.</p>
+                <p>This guide has been prepared by M.S. Chhajed &amp; Co. with the intent of providing stakeholders with an overview of India&apos;s demographic profile, key sectors, insights into the regulatory framework, forms of business enterprises, and relevant tax regimes in a concise manner. The information presented in this guide has been validated up to 31st March 2020.</p>
+                <p>India offers a large and growing consumer market, a young and skilled workforce, and an improving regulatory environment. The government&apos;s &quot;Ease of Doing Business&quot; reforms have significantly reduced the time and cost involved in starting and operating a business in India.</p>
                 <p>Foreign investors and multinational enterprises considering India as a destination should carefully evaluate the applicable regulatory requirements, including company incorporation, FDI norms, FEMA compliance, and the relevant direct and indirect tax obligations.</p>
             </>
         ),
@@ -82,7 +80,7 @@ const BlogsContent = {
         author: "Karan Patel",
         body: (
             <>
-                <p>In today's digital age, business operations are largely agnostic to geographical boundaries. New and innovative business models present tax authorities with numerous challenges in interpreting and applying taxing provisions to such transactions. The conventional approach to taxation, based on the physical presence of a business in a particular jurisdiction, now seems outdated.</p>
+                <p>In today&apos;s digital age, business operations are largely agnostic to geographical boundaries. New and innovative business models present tax authorities with numerous challenges in interpreting and applying taxing provisions to such transactions. The conventional approach to taxation, based on the physical presence of a business in a particular jurisdiction, now seems outdated.</p>
                 <p>The Equalisation Levy was introduced to address the taxation of digital transactions and to ensure that foreign digital service providers who earn significant revenue from Indian users contribute to the Indian tax base, even in the absence of a physical establishment in India.</p>
                 <p>Businesses engaged in digital advertising, e-commerce, and online platforms should carefully assess their exposure to the Equalisation Levy and ensure timely compliance with the deposit and filing requirements.</p>
             </>
@@ -90,18 +88,13 @@ const BlogsContent = {
     },
 };
 
-const BlogSeparate = () => {
-    const { Blogsname } = useParams();
-    const post = BlogsContent[Blogsname];
-
-    useEffect(() => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    }, [Blogsname]);
+const BlogSeparate = ({ slug }) => {
+    const post = BlogsContent[slug];
 
     if (!post) {
         return (
             <section id="BlogSeparateContentContainer">
-                <div className="ContainerDefault" style={{ paddingTop: 80 }}>
+                <div className="ContainerDefault pt-20">
                     <p>Sorry, no content found for this article.</p>
                 </div>
             </section>
@@ -114,9 +107,9 @@ const BlogSeparate = () => {
             {/* ── Breadcrumb ── */}
             <div className="BlogBreadcrumb">
                 <nav>
-                    <Link to="/">Home</Link>
+                    <Link href="/">Home</Link>
                     <span>/</span>
-                    <Link to="/insights-newsroom">Insights &amp; Newsroom</Link>
+                    <Link href="/insights-newsroom">Insights &amp; Newsroom</Link>
                     <span>/</span>
                     <strong>{post.title}</strong>
                 </nav>

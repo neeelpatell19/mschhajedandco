@@ -1,33 +1,33 @@
-import React from "react";
+"use client";
+
 import "../../assets/Styles/AboutBrandVideo.css";
 import { motion } from "framer-motion";
-import { TbScale, TbAward, TbBulb, TbBriefcase } from "react-icons/tb";
-import { PiGlobeHemisphereEastLight } from "react-icons/pi";
+import { Scale, Award, Lightbulb, Briefcase, Globe } from "lucide-react";
 
 const ease = [0.22, 1, 0.36, 1];
 
 const features = [
     {
         num: "01",
-        icon: <TbScale />,
+        icon: <Scale size="1em" />,
         title: "Deep Legal Acumen",
         body: "Decades of litigation experience across Income Tax, GST, and corporate matters at quasi-judicial forums across India.",
     },
     {
         num: "02",
-        icon: <TbAward />,
+        icon: <Award size="1em" />,
         title: "Trusted by 500+ Clients",
         body: "From startups to multinational corporations — our client relationships are built on transparency and long-term results.",
     },
     {
         num: "03",
-        icon: <TbBulb />,
+        icon: <Lightbulb size="1em" />,
         title: "Innovative Solutions",
         body: "We combine knowledge of the law with industry experience to design solutions that clients can actually implement.",
     },
     {
         num: "04",
-        icon: <TbBriefcase />,
+        icon: <Briefcase size="1em" />,
         title: "Full-Spectrum Advisory",
         body: "Audit, tax, transfer pricing, M&A, regulatory compliance — a single trusted partner for all your advisory needs.",
     },
@@ -137,7 +137,7 @@ const AboutBrandVideo = () => (
                         transition={{ duration: 0.75, ease, delay: 0.1 }}
                     >
                         <div className="PrimeGlobalIcon">
-                            <PiGlobeHemisphereEastLight />
+                            <Globe size="1em" strokeWidth={1.25} />
                         </div>
                         <div className="PrimeGlobalCopy">
                             <p className="PrimeGlobalLabel">Global Network</p>

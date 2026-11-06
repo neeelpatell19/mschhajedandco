@@ -1,8 +1,8 @@
-import React from "react";
+"use client";
+
 import "../../assets/Styles/Insights.css";
-import { Row, Col } from "antd";
 import BlogData from "./BlogData";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { motion } from "framer-motion";
 
 const ease = [0.22, 1, 0.36, 1];
@@ -32,22 +32,22 @@ const InSights = () => {
                         </div>
                         <h1>Legal News &amp; Articles</h1>
                     </div>
-                    <Link to="/insights-newsroom" className="view-all-link">
+                    <Link href="/insights-newsroom" className="view-all-link">
                         View All →
                     </Link>
                 </motion.div>
 
                 {/* Cards */}
-                <Row>
+                <div className="flex flex-wrap">
                     {previewBlogs.map((item, index) => (
-                        <Col lg={12} md={24} xs={24} style={{ width: "100%" }} key={index}>
+                        <div className="InsightsCol w-full flex-none lg:w-1/2" key={item.pathName}>
                             <motion.div
                                 initial={{ opacity: 0, y: 40 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true, amount: 0.15 }}
                                 transition={{ duration: 0.65, ease, delay: index * 0.12 }}
                             >
-                            <Link to={`/insights-newsroom/${item.pathName}`}>
+                            <Link href={`/insights-newsroom/${item.pathName}`}>
                                 <div className="BlogPostCardContainer">
 
                                     <div className="BlogPostImageContainer">
@@ -66,9 +66,9 @@ const InSights = () => {
                                 </div>
                             </Link>
                             </motion.div>
-                        </Col>
+                        </div>
                     ))}
-                </Row>
+                </div>
 
             </div>
         </section>

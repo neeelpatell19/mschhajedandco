@@ -1,9 +1,10 @@
-import React from "react";
-import { Tabs, Row, Col } from "antd";
+"use client";
+
 import BlogData from "../InSights/BlogData";
 import "../../assets/Styles/AllBlogs.css";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { motion } from "framer-motion";
+import BlogTabs from "./BlogTabs";
 
 const BlogCard = ({ item, index = 0 }) => (
     <motion.div
@@ -12,7 +13,7 @@ const BlogCard = ({ item, index = 0 }) => (
         viewport={{ once: true, amount: 0.1 }}
         transition={{ duration: 0.65, ease: [0.22,1,0.36,1], delay: index * 0.10 }}
     >
-        <Link to={`/insights-newsroom/${item.pathName}`} style={{ textDecoration: "none", color: "inherit", display: "block" }}>
+        <Link href={`/insights-newsroom/${item.pathName}`} className="block">
             <div className="BlogPostCardContainer">
                 <div className="BlogPostImageContainer">
                     <img src={item.blogImage} alt={item.blogTitle} />
@@ -30,6 +31,16 @@ const BlogCard = ({ item, index = 0 }) => (
     </motion.div>
 );
 
+const BlogGrid = ({ posts }) => (
+    <div className="flex w-full flex-wrap">
+        {posts.map((item, i) => (
+            <div key={item.pathName} className="w-full flex-none lg:w-1/2">
+                <BlogCard item={item} index={i} />
+            </div>
+        ))}
+    </div>
+);
+
 const AllBlogs = () => {
     const insights  = BlogData.filter((b) => b.tag === "Insights");
     const newsroom  = BlogData.filter((b) => b.tag === "Newsroom");
@@ -38,28 +49,12 @@ const AllBlogs = () => {
         {
             key: "1",
             label: "Insights",
-            children: (
-                <Row style={{ width: "100%" }}>
-                    {insights.map((item, i) => (
-                        <Col key={i} lg={12} md={24} xs={24} style={{ width: "100%" }}>
-                            <BlogCard item={item} index={i} />
-                        </Col>
-                    ))}
-                </Row>
-            ),
+            children: <BlogGrid posts={insights} />,
         },
         {
             key: "2",
             label: "Newsroom",
-            children: (
-                <Row style={{ width: "100%" }}>
-                    {newsroom.map((item, i) => (
-                        <Col key={i} lg={12} md={24} xs={24} style={{ width: "100%" }}>
-                            <BlogCard item={item} index={i} />
-                        </Col>
-                    ))}
-                </Row>
-            ),
+            children: <BlogGrid posts={newsroom} />,
         },
     ];
 
@@ -82,7 +77,7 @@ const AllBlogs = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: [0.22,1,0.36,1], delay: 0.22 }}
                     >
-                        Perspectives from Gujarat's<br />Leading CA Firm
+                        Perspectives from Gujarat&apos;s<br />Leading CA Firm
                     </motion.h1>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
@@ -98,7 +93,7 @@ const AllBlogs = () => {
             {/* ── Tabs + Cards ── */}
             <div className="ContainerDefault">
                 <div className="AllBlogsBody">
-                    <Tabs defaultActiveKey="1" items={tabItems} />
+                    <BlogTabs items={tabItems} />
                 </div>
             </div>
 

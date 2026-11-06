@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+"use client";
+
+import { useState, useEffect, useLayoutEffect, useCallback, useRef, useId } from "react";
+import { createPortal } from "react-dom";
 import "../../assets/Styles/AboutUsComponent.css";
-import { Row, Col, Modal } from "antd";
-import { GiShakingHands } from "react-icons/gi";
-import { PiUsersThreeFill } from "react-icons/pi";
+import { Handshake, Users, X } from "lucide-react";
 import justiciaBack from "./justiciaBack.svg";
 import MaheshChhajed from "./MaheshChhajed2.png";
 import HemChhajed from "./HemChhajed2.png";
@@ -12,10 +13,132 @@ import { Counter } from "../HomeHero/HomeHero";
 import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
 
+const MODAL_ANIMATION_MS = 200;
+const FOCUSABLE_SELECTOR = "a[href], button:not([disabled]), [tabindex]:not([tabindex='-1'])";
+
+const TeamModal = ({ member, origin, onClosed }) => {
+    const [closing, setClosing] = useState(false);
+    const dialogRef = useRef(null);
+    const pressedOnBackdrop = useRef(false);
+    const titleId = useId();
+
+    // Zoom in from the point that was clicked (offsetLeft/Top ignore the running transform)
+    useLayoutEffect(() => {
+        if (!origin) return;
+        const dialog = dialogRef.current;
+        dialog.style.transformOrigin = `${origin.x - dialog.offsetLeft}px ${origin.y - dialog.offsetTop}px`;
+    }, [origin]);
+
+    // Lock page scroll, move focus into the dialog and hand it back afterwards
+    useEffect(() => {
+        const previouslyFocused = document.activeElement;
+        const { overflow, paddingRight } = document.body.style;
+        const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+        document.body.style.overflow = "hidden";
+        if (scrollbarWidth > 0) document.body.style.paddingRight = `${scrollbarWidth}px`;
+        dialogRef.current.focus({ preventScroll: true });
+
+        return () => {
+            document.body.style.overflow = overflow;
+            document.body.style.paddingRight = paddingRight;
+            if (previouslyFocused instanceof HTMLElement) previouslyFocused.focus({ preventScroll: true });
+        };
+    }, []);
+
+    // Escape closes the dialog, Tab stays inside it
+    useEffect(() => {
+        const handleKeyDown = (event) => {
+            if (event.key === "Escape") {
+                setClosing(true);
+                return;
+            }
+            if (event.key !== "Tab") return;
+
+            const dialog = dialogRef.current;
+            const focusable = dialog.querySelectorAll(FOCUSABLE_SELECTOR);
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            const { activeElement } = document;
+            const leavingEdge = event.shiftKey
+                ? activeElement === first || activeElement === dialog
+                : activeElement === last;
+
+            if (leavingEdge || !dialog.contains(activeElement)) {
+                event.preventDefault();
+                (event.shiftKey ? last : first).focus();
+            }
+        };
+        document.addEventListener("keydown", handleKeyDown);
+        return () => document.removeEventListener("keydown", handleKeyDown);
+    }, []);
+
+    // Unmount once the exit animation has played
+    useEffect(() => {
+        if (!closing) return;
+        const timer = setTimeout(onClosed, MODAL_ANIMATION_MS);
+        return () => clearTimeout(timer);
+    }, [closing, onClosed]);
+
+    return createPortal(
+        <div className={`TeamModalRoot${closing ? " is-closing" : ""}`}>
+            <div className="TeamModalMask" />
+            <div
+                className="TeamModalWrap"
+                role="presentation"
+                onMouseDown={(event) => { pressedOnBackdrop.current = event.target === event.currentTarget; }}
+                onClick={(event) => {
+                    if (pressedOnBackdrop.current && event.target === event.currentTarget) setClosing(true);
+                }}
+            >
+                <div
+                    className="TeamModal"
+                    ref={dialogRef}
+                    role="dialog"
+                    aria-modal="true"
+                    aria-labelledby={titleId}
+                    tabIndex={-1}
+                >
+                    <div className="TeamModalContent">
+                        <button
+                            type="button"
+                            className="TeamModalClose"
+                            aria-label="Close"
+                            onClick={() => setClosing(true)}
+                        >
+                            <X size="1em" strokeWidth={1.5} />
+                        </button>
+
+                        <div className="flex flex-wrap">
+                            <div className="w-full md:w-5/12">
+                                <div style={{ padding: "10px" }}>
+                                    <img src={member.image} alt="" style={{ width: "100%", borderRadius: 12 }} />
+                                </div>
+                            </div>
+                            <div className="w-full md:w-7/12">
+                                <div className="ModalInsideInfo">
+                                    <h1 id={titleId}>{member.title}</h1>
+                                    <p><strong>Position:</strong> {member.position}</p>
+                                    <br />
+                                    <p><strong>Education:</strong></p>
+                                    <div>{member.educationDetails}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style={{ padding: "16px 10px 8px" }}>
+                            {member.description}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>,
+        document.body
+    );
+};
+
 const AboutUs = () => {
     const [scale, setScale] = useState(1);
-    const [isModalVisible, setIsModalVisible] = useState(false);
-    const [currentTeamMember, setCurrentTeamMember] = useState(null);
+    const [modal, setModal] = useState(null);
     const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: true });
 
     useEffect(() => {
@@ -27,20 +150,16 @@ const AboutUs = () => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    useEffect(() => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    }, []);
-
     const counterData = [
-        { title: "Years of Experience", value: 30,  suffix: "+", icon: <GiShakingHands /> },
-        { title: "Happy Clients",        value: 500, suffix: "+", icon: <PiUsersThreeFill /> },
+        { title: "Years of Experience", value: 30,  suffix: "+", icon: <Handshake size="1em" strokeWidth={1.5} /> },
+        { title: "Happy Clients",        value: 500, suffix: "+", icon: <Users size="1em" strokeWidth={1.5} /> },
     ];
 
     const teamData = [
         {
             title: "Mahesh Chhajed",
             position: "Principal Partner",
-            image: MaheshChhajed,
+            image: MaheshChhajed.src,
             description: <>
                 <p>With three decades of experience, Mahesh is well known for his competence &amp; innovation in Direct Taxation and Corporate Advisory Services, including M&amp;A. He is considered an authority on Income Tax.</p>
                 <p>He focuses on the Mergers and Acquisitions practice of the firm, while providing technical leadership to the International Tax, Transfer Pricing and Direct Tax divisions. He has successfully litigated tax matters for nearly two decades at various quasi-judicial fora.</p>
@@ -55,7 +174,7 @@ const AboutUs = () => {
         {
             title: "Hem Chhajed",
             position: "Managing Partner",
-            image: HemChhajed,
+            image: HemChhajed.src,
             description: <>
                 <p>Hem leads the Indirect Tax Division at the Firm. A fellow Chartered Accountant, he has handled several complex tax disputes and represented clients before various departmental authorities. He has advised a large number of corporates on Indirect Tax structuring and planning.</p>
                 <p>Hem is a regular contributor to newspapers in vernacular languages and has addressed seminars on contemporary tax matters. He has authored the book <em>Handbook on Service Tax</em> published by Navsarjan Publication.</p>
@@ -70,7 +189,7 @@ const AboutUs = () => {
         {
             title: "Krunal Patel",
             position: "Manager — Assurance",
-            image: KrunalPatel,
+            image: KrunalPatel.src,
             description: <>
                 <p>Krunal heads the Assurance division at the Firm. He possesses rich experience in auditing, assurance services, corporate law, and income tax across service, trading and manufacturing industries. His expertise encompasses Statutory and Internal Audit, Tax Audits and IFRS Services.</p>
             </>,
@@ -83,7 +202,7 @@ const AboutUs = () => {
         {
             title: "Preyashi Tated",
             position: "Manager — Direct Taxation",
-            image: PreyashiTated,
+            image: PreyashiTated.src,
             description: <>
                 <p>Preyashi advises and represents clients on direct tax law matters. She combines her understanding of businesses with in-depth legal knowledge to curate innovative solutions. She has assisted on wide-ranging direct tax litigation issues including search, seizures, survey, and unexplained cash credits.</p>
             </>,
@@ -94,8 +213,8 @@ const AboutUs = () => {
         },
     ];
 
-    const handleCardClick  = (member) => { setCurrentTeamMember(member); setIsModalVisible(true);  };
-    const handleModalClose = () => { setIsModalVisible(false); setCurrentTeamMember(null); };
+    const handleCardClick = (member, origin) => setModal({ member, origin });
+    const handleModalClosed = useCallback(() => setModal(null), []);
 
     return (
         <section className="AboutUsContainer">
@@ -146,9 +265,9 @@ const AboutUs = () => {
 
                 {/* ── Counter strip ── */}
                 <div className="CompanyAnimatedNumbersContainer" ref={ref}>
-                    <Row style={{ width: "100%" }}>
+                    <div className="CounterRow">
                         {counterData.map((item, index) => (
-                            <Col lg={12} md={12} xs={24} style={{ width: "100%" }} key={index}>
+                            <div className="w-full md:w-1/2" key={index}>
                                 <div className="CounterCardContainer">
                                     <div className="CounterCard">
                                         <span>{item.icon}</span>
@@ -158,15 +277,15 @@ const AboutUs = () => {
                                         <p>{item.title}</p>
                                     </div>
                                 </div>
-                            </Col>
+                            </div>
                         ))}
-                    </Row>
+                    </div>
                 </div>
 
                 {/* ── Company info ── */}
                 <div className="AboutUsInfoContainer">
                     <div className="AboutImageContainer">
-                        <img src={justiciaBack} alt="" aria-hidden="true" />
+                        <img src={justiciaBack.src} alt="" aria-hidden="true" />
                     </div>
                     <div className="ContainerDefault">
                         <motion.div
@@ -200,12 +319,22 @@ const AboutUs = () => {
                             <h2>Our Team</h2>
                         </motion.div>
                         <div className="TeamMembersDataContainer">
-                            <Row>
+                            <div className="flex flex-wrap">
                                 {teamData.map((item, index) => (
-                                    <Col key={index} lg={6} md={12} xs={24} style={{ width: "100%" }}>
+                                    <div key={index} className="w-full md:w-1/2 lg:w-1/4">
                                         <motion.div
                                             className="TeamMemberCardContainer"
-                                            onClick={() => handleCardClick(item)}
+                                            role="button"
+                                            tabIndex={0}
+                                            aria-haspopup="dialog"
+                                            aria-label={`${item.title}, ${item.position}`}
+                                            onClick={(event) => handleCardClick(item, { x: event.clientX, y: event.clientY })}
+                                            onKeyDown={(event) => {
+                                                if (event.key === "Enter" || event.key === " ") {
+                                                    event.preventDefault();
+                                                    handleCardClick(item, null);
+                                                }
+                                            }}
                                             initial={{ opacity: 0, y: 28 }}
                                             whileInView={{ opacity: 1, y: 0 }}
                                             viewport={{ once: true, amount: 0.15 }}
@@ -227,45 +356,17 @@ const AboutUs = () => {
                                                 <span>{item.position}</span>
                                             </div>
                                         </motion.div>
-                                    </Col>
+                                    </div>
                                 ))}
-                            </Row>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 {/* ── Member detail modal ── */}
-                <Modal
-                    title={false}
-                    open={isModalVisible}
-                    onCancel={handleModalClose}
-                    footer={false}
-                    width={820}
-                >
-                    {currentTeamMember && (
-                        <>
-                            <Row>
-                                <Col lg={10} md={10} xs={24} style={{ width: "100%" }}>
-                                    <div style={{ padding: "10px" }}>
-                                        <img src={currentTeamMember.image} alt="" style={{ width: "100%", borderRadius: 12 }} />
-                                    </div>
-                                </Col>
-                                <Col lg={14} md={14} xs={24} style={{ width: "100%" }}>
-                                    <div className="ModalInsideInfo">
-                                        <h1>{currentTeamMember.title}</h1>
-                                        <p><strong>Position:</strong> {currentTeamMember.position}</p>
-                                        <br />
-                                        <p><strong>Education:</strong></p>
-                                        <div>{currentTeamMember.educationDetails}</div>
-                                    </div>
-                                </Col>
-                            </Row>
-                            <div style={{ padding: "16px 10px 8px" }}>
-                                {currentTeamMember.description}
-                            </div>
-                        </>
-                    )}
-                </Modal>
+                {modal && (
+                    <TeamModal member={modal.member} origin={modal.origin} onClosed={handleModalClosed} />
+                )}
 
             </div>
         </section>

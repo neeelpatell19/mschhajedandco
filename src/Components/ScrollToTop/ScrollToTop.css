@@ -3,16 +3,35 @@
     bottom: 24px;
     right: 24px;
     z-index: 1000;
-    background-color: var(--navy);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
     border: none;
+    border-radius: 50%;
+    background-color: var(--navy);
+    color: #fff;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    user-select: none;
+    touch-action: manipulation;
+    outline: none;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 4px 16px rgba(27,45,126,0.35);
 }
 
 .scroll-to-top-btn:hover {
-    background-color: var(--navyDark) !important;
+    background-color: var(--navyDark);
     transform: translateY(-4px);
     box-shadow: 0 8px 24px rgba(27,45,126,0.45);
+}
+
+.scroll-to-top-btn:focus-visible {
+    outline: 3px solid #91caff;
+    outline-offset: 1px;
 }
 
 @media (max-width: 768px) {

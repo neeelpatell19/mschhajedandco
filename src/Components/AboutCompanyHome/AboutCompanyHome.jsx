@@ -1,8 +1,8 @@
-import React from "react";
+"use client";
+
 import "../../assets/Styles/AboutCompanyHome.css";
-import { Row, Col } from "antd";
-import { Link } from "react-router-dom";
-import { HiArrowRight } from "react-icons/hi";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Counter } from "../HomeHero/HomeHero";
@@ -39,8 +39,8 @@ const AboutComapanyHome = () => {
 
                 {/* Content row */}
                 <div className="AboutCompanyInfoHomeContainer">
-                    <Row gutter={[0, 40]}>
-                        <Col lg={12} xs={24}>
+                    <div className="flex flex-wrap gap-y-10">
+                        <div className="w-full lg:w-1/2">
                             <motion.div
                                 className="AboutCompanyImageHomeContainer"
                                 variants={slideR}
@@ -51,9 +51,9 @@ const AboutComapanyHome = () => {
                             >
                                 <img src="/Images/CA firms.jpg" alt="M.S. Chhajed & Co." />
                             </motion.div>
-                        </Col>
+                        </div>
 
-                        <Col lg={12} xs={24}>
+                        <div className="w-full lg:w-1/2">
                             <motion.div
                                 className="AboutCompanyContentHomeContainer"
                                 variants={slideL}
@@ -97,12 +97,12 @@ const AboutComapanyHome = () => {
                                     ))}
                                 </div>
 
-                                <Link to="/about-us" className="AboutLearnMoreLink">
-                                    About the Firm <HiArrowRight />
+                                <Link href="/about-us" className="AboutLearnMoreLink">
+                                    About the Firm <ArrowRight size="1em" />
                                 </Link>
                             </motion.div>
-                        </Col>
-                    </Row>
+                        </div>
+                    </div>
                 </div>
 
             </div>

@@ -16,7 +16,7 @@
   display: inline-flex;
   align-items: center;
   gap: 14px;
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-roboto), "Roboto", sans-serif;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.20em;
@@ -103,7 +103,7 @@
 }
 
 .sector-item p {
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-roboto), "Roboto", sans-serif;
   font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.04em;

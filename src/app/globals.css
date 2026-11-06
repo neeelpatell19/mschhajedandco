@@ -1,4 +1,54 @@
-@import url('https://fonts.googleapis.com/css2?family=Prata&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+/* ─── Tailwind CSS v4 ────────────────────────────────────────────────
+   Preflight (Tailwind's CSS reset) is intentionally NOT imported, so the
+   existing hand-written styles below and in the component .css files render
+   exactly as before. Theme + utilities are available for new work.
+
+   Cascade note: Tailwind utilities live in a cascade layer; un-layered custom
+   CSS (the component .css files) wins over them when both set the same
+   property on the same element. Global element rules (body/a/h1-h6/p/li) are
+   kept in `@layer base` below so utilities CAN override those.            */
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+/* Breakpoint kept at 992px: that is where the original layout switched to
+   its desktop columns (antd's `lg`). `md` stays at Tailwind's default 768px. */
+@theme {
+  --breakpoint-lg: 62rem;
+}
+
+/* Custom design tokens exposed as Tailwind utilities, e.g. bg-navy,
+   text-brand, border-line, font-display, shadow-card. The plain CSS
+   variables (--navy, --brand, ...) below remain the source of truth.      */
+@theme inline {
+  --color-navy: var(--navy);
+  --color-navy-dark: var(--navyDark);
+  --color-navy-light: var(--navyLight);
+  --color-brand: var(--brand);
+  --color-brand-dark: var(--brandDark);
+  --color-brand-light: var(--brandLight);
+  --color-dark: var(--dark);
+  --color-dark-alt: var(--darkAlt);
+  --color-surface: var(--surface);
+  --color-surface-alt: var(--surfaceAlt);
+  --color-ink: var(--text);
+  --color-muted: var(--textMuted);
+  --color-line: var(--border);
+  --color-line-med: var(--borderMed);
+  --color-line-dark: var(--borderDark);
+
+  --font-sans: var(--font-roboto), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-prata), ui-serif, Georgia, serif;
+
+  --shadow-soft: var(--shadowSm);
+  --shadow-card: var(--shadowMd);
+  --shadow-float: var(--shadowLg);
+  --shadow-deep: var(--shadowXl);
+
+  --radius-brand: var(--radius);
+  --radius-brand-lg: var(--radiusLg);
+  --radius-brand-xl: var(--radiusXl);
+}
 
 /* ─── Design Tokens ──────────────────────────────────────────────── */
 :root {
@@ -54,41 +104,43 @@
   --brandColor:          #931e95;
 }
 
-/* ─── Reset ──────────────────────────────────────────────────────── */
-*, *::before, *::after { box-sizing: border-box; }
+@layer base {
+  /* ─── Reset ──────────────────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; }
 
-body {
-  background-color: var(--white);
-  margin: 0;
-  padding: 0;
-  font-family: "Roboto", sans-serif;
-  color: var(--text);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  body {
+    background-color: var(--white);
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-roboto), "Roboto", sans-serif;
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-a { text-decoration: none; color: inherit; }
+  a { text-decoration: none; color: inherit; }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Prata", serif;
-  color: var(--text);
-  line-height: 1.12;
-  margin-top: 0;
-}
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-prata), "Prata", serif;
+    color: var(--text);
+    line-height: 1.12;
+    margin-top: 0;
+  }
 
-p {
-  font-family: "Roboto", sans-serif;
-  margin: 0;
-  font-size: 17px;
-  font-weight: 400;
-  line-height: 1.70;
-  color: var(--textMuted);
-}
+  p {
+    font-family: var(--font-roboto), "Roboto", sans-serif;
+    margin: 0;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.70;
+    color: var(--textMuted);
+  }
 
-li {
-  font-family: "Roboto", sans-serif;
-  line-height: 1.85;
-  color: var(--textMuted);
+  li {
+    font-family: var(--font-roboto), "Roboto", sans-serif;
+    line-height: 1.85;
+    color: var(--textMuted);
+  }
 }
 
 /* ─── Layout ─────────────────────────────────────────────────────── */
@@ -208,7 +260,7 @@ li {
 
 /* Line drawn after the dot via the span's own ::before */
 .section-label span {
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-roboto), "Roboto", sans-serif;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.22em;
@@ -249,7 +301,7 @@ li {
   border-radius: 40px;
   background: var(--navy);
   color: white;
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-roboto), "Roboto", sans-serif;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -304,7 +356,7 @@ li {
   border-radius: 40px;
   background: transparent;
   color: white;
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-roboto), "Roboto", sans-serif;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.14em;

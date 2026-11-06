@@ -14,26 +14,18 @@
 /* Scrolled: white + blur */
 #NavigationBarContainer.scrolled {
   background: rgba(255, 255, 255, 0.97);
-  backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
+  backdrop-filter: blur(22px);
   box-shadow: 0 1px 0 var(--border), 0 3px 0 var(--navy);
 }
 
 /* Nav links go dark on white background */
 #NavigationBarContainer.scrolled .navButton {
-  color: var(--text) !important;
-}
-
-#NavigationBarContainer.scrolled .navButton a {
-  color: var(--text) !important;
+  color: var(--text);
 }
 
 #NavigationBarContainer.scrolled .navButton:hover {
-  color: var(--navy) !important;
-}
-
-#NavigationBarContainer.scrolled .navButton:hover a {
-  color: var(--navy) !important;
+  color: var(--navy);
 }
 
 #NavigationBarContainer.scrolled .NavCTABtn {
@@ -47,8 +39,8 @@
 }
 
 #NavigationBarContainer.scrolled .menuButton {
-  border-color: rgba(0,0,0,0.18) !important;
-  color: var(--text) !important;
+  border-color: rgba(0,0,0,0.18);
+  color: var(--text);
 }
 
 /* Hide / show on scroll direction */
@@ -87,21 +79,28 @@
 }
 
 .navButton {
-  position: relative !important;
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  color: rgba(255, 255, 255, 0.80) !important;
-  font-family: "Roboto", sans-serif !important;
-  font-size: 11px !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.13em !important;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.80);
+  font-family: var(--font-roboto), "Roboto", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-align: center;
   text-transform: uppercase;
-  padding: 8px 14px !important;
-  height: auto !important;
-  line-height: 1 !important;
+  white-space: nowrap;
+  padding: 8px 14px;
+  line-height: 1;
   cursor: pointer;
-  transition: color 0.28s ease !important;
+  user-select: none;
+  touch-action: manipulation;
+  outline: none;
+  transition: color 0.28s ease;
 }
 
 /* Underline grows from left on hover */
@@ -124,20 +123,28 @@
 }
 
 .navButton:hover {
-  color: white !important;
+  color: white;
 }
 
 .navButton:hover::after {
   transform: scaleX(1);
 }
 
-.navButton a {
-  color: inherit !important;
-  background: transparent !important;
-  text-transform: uppercase;
-  letter-spacing: 0.13em;
-  font-size: 11px;
-  font-weight: 700;
+/* Keyboard focus ring shared by the nav controls */
+.navButton:focus-visible,
+.menuButton:focus-visible,
+.navDropdownItem:focus-visible,
+.mobileDrawerClose:focus-visible,
+.mobileNavHeader:focus-visible,
+.mobileNavHeaderLink:focus-visible,
+.mobileNavSubLink:focus-visible {
+  outline: 3px solid #91caff;
+  outline-offset: 1px;
+}
+
+.navChevron {
+  font-size: 14px;
+  margin: -2px -2.5px -2px 1.5px;
 }
 
 /* ─── Contact CTA ────────────────────────────────────────────────── */
@@ -149,7 +156,7 @@
   border-radius: 40px;
   background: transparent;
   color: rgba(255, 255, 255, 0.85);
-  font-family: "Roboto", sans-serif;
+  font-family: var(--font-roboto), "Roboto", sans-serif;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.13em;
@@ -166,39 +173,67 @@
   transform: translateY(-1px);
 }
 
-/* ─── Ant Design Dropdown ────────────────────────────────────────── */
-.ant-dropdown { padding-top: 18px; }
-
-.ant-dropdown-menu {
-  padding: 10px 0 !important;
-  border-radius: 14px !important;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.22) !important;
-  background: rgba(14, 15, 26, 0.97) !important;
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
-  min-width: 290px;
-  border: 1px solid rgba(255, 255, 255, 0.07) !important;
+/* ─── Practices Dropdown ─────────────────────────────────────────── */
+.navDropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
-.ant-dropdown-menu .ant-dropdown-menu-item {
-  padding: 12px 24px !important;
-  font-family: "Roboto", sans-serif;
-  font-size: 12px !important;
+/* Top padding keeps the pointer inside the hover area while it travels from the button to the menu */
+.navDropdownPanel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+  width: max-content;
+  padding-top: 22px;
+  opacity: 0;
+  visibility: hidden;
+  transform: scaleY(0.8);
+  transform-origin: top;
+  transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.23, 1, 0.32, 1), visibility 0s linear 0.2s;
+}
+
+.navDropdownPanel.open {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
+}
+
+.navDropdownMenu {
+  margin: 0;
+  padding: 10px 0;
+  list-style: none;
+  border-radius: 14px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.22);
+  background: rgba(14, 15, 26, 0.97);
+  background-clip: padding-box;
+  -webkit-backdrop-filter: blur(22px);
+  backdrop-filter: blur(22px);
+  min-width: 290px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.navDropdownItem {
+  display: flex;
+  align-items: center;
+  padding: 12px 24px;
+  font-family: var(--font-roboto), "Roboto", sans-serif;
+  font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.06em;
-  color: rgba(255, 255, 255, 0.70) !important;
-  background: transparent !important;
-  transition: color 0.22s ease, padding-left 0.22s ease !important;
+  line-height: 1.5714285714285714;
+  color: rgba(255, 255, 255, 0.70);
+  cursor: pointer;
+  outline: none;
+  transition: color 0.22s ease, padding-left 0.22s ease;
 }
 
-.ant-dropdown-menu .ant-dropdown-menu-item:hover {
-  color: white !important;
-  padding-left: 32px !important;
-  background: transparent !important;
-}
-
-.ant-dropdown-menu-item-active {
-  background: transparent !important;
+.navDropdownItem:hover {
+  color: white;
+  padding-left: 32px;
 }
 
 /* ─── Mobile ─────────────────────────────────────────────────────── */
@@ -206,104 +241,215 @@
   display: none;
 }
 
-/* Ant Drawer overrides — light */
-.ant-drawer-header {
-  background: var(--white) !important;
-  border-bottom: 1px solid var(--border) !important;
-  padding: 20px 24px !important;
+/* Drawer — slides in from the right over a dimmed overlay */
+.mobileDrawer {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  visibility: hidden;
+  transition: visibility 0s linear 0.3s;
 }
 
-.ant-drawer-title {
-  color: var(--navy) !important;
-  font-family: "Prata", serif !important;
-  font-size: 18px !important;
+.mobileDrawer.open {
+  visibility: visible;
+  transition-delay: 0s;
 }
 
-.ant-drawer-close {
-  color: var(--textMuted) !important;
+.mobileDrawerMask {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.ant-drawer-body {
-  background: var(--white) !important;
-  padding: 20px 24px !important;
+.mobileDrawer.open .mobileDrawerMask {
+  opacity: 1;
 }
 
-.ant-drawer-body .ant-collapse {
-  border: none !important;
-  background: transparent !important;
+.mobileDrawerPanel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  max-width: 100vw;
+  overflow: auto;
+  background: var(--white);
+  box-shadow:
+    -6px 0 16px 0 rgba(0, 0, 0, 0.08),
+    -3px 0 6px -4px rgba(0, 0, 0, 0.12),
+    -9px 0 28px 8px rgba(0, 0, 0, 0.05);
+  opacity: 0.7;
+  transform: translateX(100%);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  outline: none;
 }
 
-.ant-drawer-body .ant-collapse-item {
-  border-bottom: 1px solid var(--border) !important;
-  background: transparent !important;
+.mobileDrawer.open .mobileDrawerPanel {
+  opacity: 1;
+  transform: none;
 }
 
-.ant-drawer-body .ant-collapse-header {
-  color: var(--text) !important;
-  font-family: "Roboto", sans-serif !important;
-  font-size: 12px !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.13em !important;
-  text-transform: uppercase !important;
-  padding: 18px 0 !important;
-  background: transparent !important;
+.mobileDrawerHeader {
+  display: flex;
+  flex: none;
+  align-items: center;
+  padding: 20px 24px;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
 }
 
-.ant-drawer-body .ant-collapse-content {
-  background: transparent !important;
-  border-top: none !important;
+.mobileDrawerClose {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--textMuted);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.2s ease;
 }
 
-.ant-drawer-body .ant-collapse-content-box {
-  padding: 0 0 14px !important;
+.mobileDrawerClose:hover {
+  background-color: rgba(0, 0, 0, 0.06);
 }
 
-.ant-collapse-content .ant-btn {
-  display: block !important;
-  text-align: left !important;
-  height: auto !important;
-  padding: 8px 16px !important;
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
+.mobileDrawerClose:active {
+  background-color: rgba(0, 0, 0, 0.15);
 }
 
-.ant-collapse-content .ant-btn a {
-  color: var(--textMuted) !important;
-  font-size: 12px !important;
-  font-family: "Roboto", sans-serif !important;
+.mobileDrawerTitle {
+  flex: 1;
+  margin: 0;
+  color: var(--navy);
+  font-family: var(--font-prata), "Prata", serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.mobileDrawerBody {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  padding: 20px 24px;
+  overflow: auto;
+  background: var(--white);
+}
+
+/* Accordion items */
+.mobileNavItem {
+  border-bottom: 1px solid var(--border);
+}
+
+.mobileNavHeader {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  padding: 18px 0;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font-roboto), "Roboto", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  line-height: 1.5714285714285714;
+  text-align: left;
+  text-transform: uppercase;
+  cursor: pointer;
+  outline: none;
+}
+
+.mobileNavArrow {
+  display: flex;
+  align-items: center;
+  flex: none;
+  width: 12px;
+  height: 22px;
+  padding-right: 12px;
+  box-sizing: content-box;
+  color: var(--textMuted);
+  font-size: 12px;
+}
+
+.mobileNavArrow svg {
+  flex: none;
+  margin: 0 -4px;
+  transition: transform 0.3s;
+}
+
+.mobileNavHeader[aria-expanded="true"] .mobileNavArrow svg {
+  transform: rotate(90deg);
+}
+
+/* Plain links line up with the accordion headers (arrow gutter = 24px) */
+.mobileNavHeaderLink {
+  display: block;
+  min-height: 58px;
+  padding: 18px 0 18px 24px;
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 700;
+  font-family: var(--font-roboto), "Roboto", sans-serif;
+  letter-spacing: 0.13em;
+  line-height: 1.5714285714285714;
+  text-transform: uppercase;
+  outline: none;
+}
+
+.mobileNavPanel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.2s ease-in-out;
+}
+
+.mobileNavPanel.open {
+  grid-template-rows: 1fr;
+}
+
+.mobileNavPanelInner {
+  min-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.mobileNavPanel.open .mobileNavPanelInner {
+  opacity: 1;
+}
+
+.mobileNavPanelContent {
+  padding: 0 0 14px;
+}
+
+.mobileNavSubLink {
+  display: block;
+  padding: 8px 16px;
+  color: var(--textMuted);
+  font-size: 12px;
+  font-family: var(--font-roboto), "Roboto", sans-serif;
   font-weight: 500;
   letter-spacing: 0.06em;
+  line-height: 1.55;
+  text-align: left;
+  outline: none;
   transition: color 0.22s ease;
 }
 
-.ant-collapse-content .ant-btn:hover a {
-  color: var(--navy) !important;
-}
-
-.mobileNavHeaderLink {
-  color: var(--text) !important;
-  font-size: 12px !important;
-  font-weight: 700 !important;
-  font-family: "Roboto", sans-serif !important;
-  letter-spacing: 0.13em !important;
-  text-transform: uppercase !important;
-}
-
-/* Suppress collapse arrow for non-dropdown items */
-.ant-drawer-body .ant-collapse .ant-collapse-item .ant-collapse-expand-icon {
-  opacity: 0;
-}
-
-.ant-drawer-body .ant-collapse:nth-child(2) .ant-collapse-item .ant-collapse-expand-icon {
-  opacity: 1;
-  color: var(--textMuted) !important;
-}
-
-.ant-drawer-body .ant-collapse:first-child .ant-collapse-content,
-.ant-drawer-body .ant-collapse:nth-child(3) .ant-collapse-content,
-.ant-drawer-body .ant-collapse:nth-child(4) .ant-collapse-content {
-  display: none;
+.mobileNavSubLink:hover {
+  color: var(--navy);
 }
 
 @media (max-width: 768px) {
@@ -317,21 +463,25 @@
 
   .menuButton {
     display: block;
-    background: transparent !important;
-    border: 1.5px solid rgba(255, 255, 255, 0.30) !important;
-    color: white !important;
-    font-size: 11px !important;
-    font-weight: 700 !important;
+    background: transparent;
+    border: 1.5px solid rgba(255, 255, 255, 0.30);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
     letter-spacing: 0.10em;
-    padding: 7px 18px !important;
-    border-radius: 40px !important;
-    height: auto !important;
-    box-shadow: none !important;
-    transition: background 0.3s ease, border-color 0.3s ease !important;
+    text-align: center;
+    white-space: nowrap;
+    padding: 7px 18px;
+    border-radius: 40px;
+    cursor: pointer;
+    user-select: none;
+    touch-action: manipulation;
+    outline: none;
+    transition: background 0.3s ease, border-color 0.3s ease;
   }
 
   .menuButton:hover {
-    background: rgba(255, 255, 255, 0.08) !important;
-    border-color: rgba(255, 255, 255, 0.55) !important;
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.55);
   }
 }

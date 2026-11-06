@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+"use client";
+
+import { useEffect, useState } from "react";
 import "../../assets/Styles/HomeHero.css";
 import { useInView } from "react-intersection-observer";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { FaArrowRightLong } from "react-icons/fa6";
+import Link from "next/link";
+import { MoveRight } from "lucide-react";
 
 export const Counter = ({ value, suffix, trigger }) => {
     const [count, setCount] = useState(0);
@@ -93,12 +95,12 @@ const HomeHero = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.85, ease, delay: 0.66 }}
                 >
-                    <Link to="/practices/assurances">
+                    <Link href="/practices/assurances">
                         <button className="HeroCtaPrimary">
-                            Explore Our Services <FaArrowRightLong />
+                            Explore Our Services <MoveRight size="1em" strokeWidth={2.5} />
                         </button>
                     </Link>
-                    <Link to="/about-us">
+                    <Link href="/about-us">
                         <button className="HeroCtaSecondary">About the Firm</button>
                     </Link>
                 </motion.div>

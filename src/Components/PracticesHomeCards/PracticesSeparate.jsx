@@ -1,38 +1,15 @@
-import React, { useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
 import "./PracticeSeparate.css";
 import { motion } from "framer-motion";
-import { HiArrowRight } from "react-icons/hi";
+import { ArrowRight } from "lucide-react";
+import { allPractices, practicesMeta } from "./practicesData";
 import TRANSACTIONADVISORY from "./TRANSACTION-ADVISORY.jpeg";
 
 const ease = [0.22, 1, 0.36, 1];
 
-const allPractices = [
-    { label: "India Strategy — Doing Business in India", path: "india-strategy-doing-business-india" },
-    { label: "Start-Up Services",                        path: "start-up-services"                   },
-    { label: "Assurances",                              path: "assurances"                           },
-    { label: "Transaction Advisory",                    path: "transaction-advisory"                 },
-    { label: "Direct Taxes",                            path: "direct-taxes"                         },
-    { label: "Goods and Service Tax",                   path: "goods-and-services-tax"               },
-    { label: "Transfer Pricing",                        path: "transfer-pricing"                     },
-    { label: "Knowledge Process Outsourcing",           path: "knowledge-process-outsourcing"        },
-    { label: "Commercial and Legal Assistance",         path: "commercial-and-legal-assistance"      },
-];
-
-const practicesMeta = {
-    "india-strategy-doing-business-india": "Expert advisory for companies entering and expanding in Indian markets.",
-    "start-up-services":                   "End-to-end compliance and growth advisory for new ventures at every stage.",
-    "assurances":                          "Independent, high-quality audit and assurance services trusted across India.",
-    "transaction-advisory":                "Strategic M&A, due diligence and valuation across complex transactions.",
-    "direct-taxes":                        "Proactive tax planning, structuring and litigation support for corporates.",
-    "goods-and-services-tax":             "GST registration, compliance advisory and representation before authorities.",
-    "transfer-pricing":                    "APA advisory, documentation and dispute resolution for cross-border pricing.",
-    "knowledge-process-outsourcing":       "Scalable outsourcing of bookkeeping, payroll and compliance functions.",
-    "commercial-and-legal-assistance":     "Legal drafting, corporate governance and business structuring support.",
-};
-
-const PracticesSeparate = () => {
-    const { practiceName } = useParams();
+const PracticesSeparate = ({ practiceName }) => {
     const activeLabel = allPractices.find(p => p.path === practiceName)?.label || "Practice";
     const tagline     = practicesMeta[practiceName] || "";
 
@@ -43,7 +20,7 @@ const PracticesSeparate = () => {
                 <div className="PracticeImageContainer">
                     <h2>INDIA STRATEGY- DOING BUSINESS IN INDIA</h2>
 
-                    <img src={TRANSACTIONADVISORY} alt="" />
+                    <img src={TRANSACTIONADVISORY.src} alt="" />
                 </div>
                 <p>
                     <b>Doing Business in Ahmedabad, Sanand, Baroda                    </b>
@@ -176,7 +153,7 @@ const PracticesSeparate = () => {
                 <p><b>M&A Consulting Services and Project Financing in India                </b></p>
                 <p>Inorganic growth can provide a much-needed boost to a company’s capabilities. Investors must evaluate the accounting, tax, regulatory, legal, management, and cultural aspects of the target company. While investors would like to have complete and accurate information to make critical decisions, such information is not always readily available and is often difficult to evaluate. On-the-ground knowledge greatly improves the probability of a deal’s proper execution and success.
                 </p>
-                <p>At M. S. Chhajed, we focus on enabling transactions between a range of operating structures such as corporate entities, limited liability partnerships, trusts, and others, by deeply connecting with the business model. Our team is involved at every stage of the process, followed by post-transaction hand-holding until the client is ready for the final handover. By creating an assumption-driven notion of the business model based on research, we gather insights into the value it can deliver. We ensure that the core of every transaction is driven by 'trust.'</p>
+                <p>At M. S. Chhajed, we focus on enabling transactions between a range of operating structures such as corporate entities, limited liability partnerships, trusts, and others, by deeply connecting with the business model. Our team is involved at every stage of the process, followed by post-transaction hand-holding until the client is ready for the final handover. By creating an assumption-driven notion of the business model based on research, we gather insights into the value it can deliver. We ensure that the core of every transaction is driven by &apos;trust.&apos;</p>
 
                 <p>We don’t just work as advisers or consultants but as your “Implementation Partners.” Our range of transaction advisory and support services includes:</p><br />
                 <p><b>1. Foreign Exchange Management Compliance</b></p>
@@ -548,14 +525,6 @@ const PracticesSeparate = () => {
         )
         // Add content for other practices
     };
-    useEffect(() => {
-        // Scroll to top when the component mounts
-        window.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: "smooth", // Adds smooth scrolling
-        });
-    }, []);
     return (
         <div id="separatePracticeContainer">
 
@@ -577,9 +546,9 @@ const PracticesSeparate = () => {
             {/* ── Breadcrumb ── */}
             <div className="PracticeBreadcrumb">
                 <nav>
-                    <Link to="/">Home</Link>
+                    <Link href="/">Home</Link>
                     <span>/</span>
-                    <Link to="/practices/assurances">Practices</Link>
+                    <Link href="/practices/assurances">Practices</Link>
                     <span>/</span>
                     <strong>{activeLabel}</strong>
                 </nav>
@@ -597,7 +566,7 @@ const PracticesSeparate = () => {
                         {allPractices.map((p, i) => (
                             <li key={i}>
                                 <Link
-                                    to={`/practices/${p.path}`}
+                                    href={`/practices/${p.path}`}
                                     className={practiceName === p.path ? "active" : ""}
                                 >
                                     <span className="sidebar-num">
@@ -615,7 +584,7 @@ const PracticesSeparate = () => {
                             href="mailto:info@mschhajedandco.com"
                             className="PracticeSidebarCTABtn"
                         >
-                            Talk to an Expert <HiArrowRight />
+                            Talk to an Expert <ArrowRight size="1em" />
                         </a>
                     </div>
                 </aside>
